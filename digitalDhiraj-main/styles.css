@@ -1,0 +1,277 @@
+/* --- styles.css --- */
+
+/* 1. PREMIUM APPLE-STYLE VARIABLES */
+:root {
+    --bg-body: #000000;
+    --bg-nav: rgba(22, 22, 23, 0.8);
+    --bg-card: #1c1c1e;
+    --bg-secondary: #161617;
+    
+    --text-primary: #f5f5f7;
+    --text-secondary: #86868b;
+    
+    --accent: #2997ff;
+    --accent-hover: #0071e3;
+    
+    --border: rgba(255, 255, 255, 0.1);
+    --radius: 18px;
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    
+    --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* RESET & BASE */
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+
+body {
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; transition: var(--transition); }
+ul { list-style: none; }
+
+/* 2. LAYOUT UTILITIES */
+.container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.section { padding: 120px 0; min-height: 80vh; }
+
+.section-header { text-align: center; margin-bottom: 60px; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* 3. NAVIGATION */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 48px;
+    background: var(--bg-nav);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    z-index: 9999;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 100%;
+}
+
+.logo { 
+    font-size: 1.1rem; 
+    font-weight: 600; 
+    letter-spacing: -0.01em; 
+    color: var(--text-primary);
+    z-index: 102;
+}
+
+.nav-links { display: flex; gap: 34px; }
+.nav-links a { 
+    font-size: 0.75rem; 
+    color: #e8e8ed; 
+    opacity: 0.8; 
+    letter-spacing: -0.01em;
+    transition: opacity 0.2s ease; 
+}
+.nav-links a:hover, .nav-links a.active { opacity: 1; color: white; }
+
+/* 4. MOBILE MENU */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 20px;
+    height: 10px;
+    cursor: pointer;
+    z-index: 102;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-primary);
+    transition: var(--transition);
+}
+
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+    padding-left: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, visibility 0.4s;
+    visibility: hidden;
+}
+
+.mobile-menu-overlay.active { opacity: 1; pointer-events: auto; visibility: visible; }
+.mobile-link { font-size: 1.8rem; font-weight: 600; color: var(--text-primary); margin-bottom: 24px; }
+.hamburger.active .line:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
+.hamburger.active .line:nth-child(2) { transform: translateY(-4.5px) rotate(-45deg); }
+
+/* 5. HERO STYLES (Index) */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: 60px;
+    background: radial-gradient(circle at 50% 120%, #1c1c1e 0%, #000 70%);
+}
+
+.hero h1 {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    background: linear-gradient(180deg, #fff 0%, #bca1f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 24px;
+}
+
+.hero p {
+    font-size: 1.4rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+.btn-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.btn {
+    padding: 14px 32px;
+    border-radius: 980px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+}
+.btn-primary { background: var(--text-primary); color: #000; }
+.btn-primary:hover { transform: scale(1.03); box-shadow: 0 0 20px rgba(255,255,255,0.3); }
+.btn-outline { background: transparent; border: 1px solid var(--text-primary); color: var(--text-primary); }
+.btn-outline:hover { background: rgba(255,255,255,0.1); }
+
+/* 6. PROJECT CARDS (Projects) */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+}
+.project-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+.project-card:hover { transform: scale(1.02); background: #252527; }
+.project-img {
+    height: 220px;
+    background: linear-gradient(135deg, #2c3e50, #000);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; color: rgba(255,255,255,0.2);
+}
+.project-content { padding: 30px; }
+.project-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 8px; }
+.project-desc { color: var(--text-secondary); margin-bottom: 20px; }
+.tech-pill {
+    font-size: 0.75rem; background: rgba(255,255,255,0.1);
+    color: var(--text-primary); padding: 6px 12px;
+    border-radius: 20px; display: inline-block; margin-right: 6px;
+}
+.link-text { display: inline-block; margin-top: 15px; color: var(--accent); font-weight: 500; }
+
+/* 7. SKILLS (About) */
+.skills-container {
+    background: var(--bg-secondary); border-radius: var(--radius);
+    padding: 40px; display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;
+}
+.skill-group h3 { color: var(--text-secondary); margin-bottom: 15px; text-transform: uppercase; font-size: 0.9rem; }
+.skill-item { display: block; font-size: 1.1rem; margin-bottom: 10px; font-weight: 500; }
+
+/* -- Skill Icons Styling -- */
+.skill-item i { width: 25px; transition: transform 0.3s ease; }
+.skill-item:hover i { transform: scale(1.2); }
+
+/* Specific Brand Colors */
+.skill-item .fa-java { color: #e76f00; }     /* Java Orange */
+.skill-item .fa-js { color: #f7df1e; }       /* JS Yellow */
+.skill-item .fa-python { color: #3776ab; }   /* Python Blue */
+.skill-item .fa-code { color: #9b4993; }     /* C# Purple */
+.skill-item .fa-leaf { color: #6db33f; }     /* Spring Green */
+.skill-item .fa-database { color: #47a248; } /* MongoDB/SQL Green */
+.skill-item .fa-server { color: #007aff; }   /* API Blue */
+.skill-item .fa-react { color: #61dafb; }    /* React Blue */
+.skill-item .fa-html5 { color: #e34c26; }    /* HTML Orange */
+.skill-item .fa-mobile { color: #61dafb; }   /* Mobile/React Native */
+
+
+/* 8. TIMELINE (Experience) */
+.timeline-item {
+    padding: 30px 0; border-left: 2px solid #333;
+    padding-left: 30px; position: relative;
+}
+.timeline-dot {
+    width: 12px; height: 12px; background: var(--accent);
+    border-radius: 50%; position: absolute; left: -7px; top: 36px;
+    box-shadow: 0 0 0 4px var(--bg-body);
+}
+.exp-role { font-size: 1.5rem; font-weight: 600; }
+.exp-company { font-size: 1.1rem; color: var(--accent); }
+.exp-date { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 15px; display: block; }
+
+/* 9. CONTACT */
+.contact-box {
+    background: var(--bg-card); border-radius: var(--radius);
+    padding: 60px 40px; text-align: center;
+}
+
+/* FOOTER */
+footer { padding: 40px 0; text-align: center; color: var(--text-secondary); font-size: 0.8rem; border-top: 1px solid var(--border); }
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .hero h1 { font-size: 2.8rem; }
+    .btn-group { flex-direction: column; width: 100%; }
+    .btn { width: 100%; }
+}

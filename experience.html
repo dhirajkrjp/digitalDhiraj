@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience | Dhiraj Kumar</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/dhiraj7kr/digitalDhiraj/refs/heads/main/Project/Flower.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="experience.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Dhiraj Kumar</a>
+            <div class="nav-links">
+                <a href="about.html">About</a>
+                <a href="project.html">Projects</a>
+                <a href="experience.html" class="active">Experience</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="hamburger" id="hamburger-btn">
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </nav>
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <a href="about.html" class="mobile-link">About</a>
+        <a href="project.html" class="mobile-link">Projects</a>
+        <a href="experience.html" class="mobile-link">Experience</a>
+        <a href="contact.html" class="mobile-link">Contact</a>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Timeline.</h2>
+                <p class="section-subtitle">My professional journey so far.</p>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="exp-role">Software Developer</div>
+                    <div class="exp-company">ACUVATE Software Pvt. Ltd.</div>
+                    
+                    <div class="exp-date">
+                        Aug 2024 – Present <span id="duration" style="opacity: 0.7; margin-left: 8px; font-weight: 400;"></span>
+                    </div>
+                    
+                    <p class="exp-detail">
+                        Spearheaded the development of <strong>ANNA</strong>, an AI-powered travel assistant chatbot for <a href="https://www.hollandamerica.com/en/us" target="_blank" style="color: var(--accent);">Holland America Line</a>. Engineered a high-performance live-agent connector using <strong>.NET and C#</strong>, enabling seamless real-time communication handoffs between AI bots and human support agents.
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="exp-role">Web Developer Intern</div>
+                    <div class="exp-company">Bharat Intern</div>
+                    <div class="exp-date">Oct 2023 – Nov 2023</div>
+                    <p class="exp-detail">
+                        Architected a full-stack <strong>Cruise Management System</strong> using the <strong>MERN Stack</strong> (MongoDB, Express, React, Node.js). Implemented end-to-end features including dynamic trip listings, secure booking workflows, and admin dashboards, while optimizing the UI for responsive component performance.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer><p>&copy; 2026 Dhiraj Kumar.</p></footer>
+    <script src="script.js"></script>
+
+    <script>
+        function updateExperience() {
+            const startDate = new Date('2024-08-01'); // Start Date: Aug 1, 2024
+            const currentDate = new Date();
+            
+            let years = currentDate.getFullYear() - startDate.getFullYear();
+            let months = currentDate.getMonth() - startDate.getMonth();
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            // Add 1 to include the current partial month
+            months += 1; 
+
+            // Handle overflow if month addition pushes to a new year
+            if (months >= 12) {
+                years++;
+                months -= 12;
+            }
+
+            let durationText = "(";
+            if (years > 0) durationText += years + (years === 1 ? " yr " : " yrs ");
+            if (months > 0) durationText += months + (months === 1 ? " mo" : " mos");
+            durationText += ")";
+
+            // Only show if at least 1 month has passed
+            if (years === 0 && months === 0) durationText = "(Just started)";
+
+            document.getElementById("duration").textContent = durationText;
+        }
+
+        updateExperience();
+    </script>
+</body>
+</html>

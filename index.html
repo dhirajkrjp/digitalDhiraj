@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhiraj Kumar</title>
+<link rel="icon" type="image/png" href="logo.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --text: #222;
+  --muted: #555;
+  --link: #0645ad;
+  --link-visited: #0b0080;
+  --border: #e2e2e2;
+  --bg: #ffffff;
+  --bg-alt: #f0f0f0;
+  --green: #2a7a2a;
+  --red: #cc0000;
+  --timeline-line: #ccc;
+  --year: #999;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--link); }
+a:visited { color: var(--link-visited); }
+a:hover { text-decoration: underline; }
+
+img { display: block; max-width: 100%; }
+
+/* ── Page wrapper ── */
+.page { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+/* ── HEADER ── */
+.header {
+  padding: 56px 0 40px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+
+.header-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.header-info h1 {
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.header-tagline {
+  font-size: 1rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.header-socials {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  width: 42px;
+  height: 42px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.social-icon:hover { background: #444; color: #fff; }
+.social-icon svg { width: 20px; height: 20px; fill: white; }
+
+/* ── Divider ── */
+hr.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* ── Section wrapper ── */
+.section {
+  padding: 48px 0;
+}
+
+.section-alt {
+  background: var(--bg-alt);
+  padding: 48px 0;
+}
+
+.section-title {
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+
+/* ── TIMELINE ── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.tl-entry {
+  display: grid;
+  grid-template-columns: 100px 1px 1fr;
+  column-gap: 0;
+  position: relative;
+  padding-bottom: 40px;
+}
+.tl-entry:last-child { padding-bottom: 0; }
+
+.tl-year-col {
+  padding-right: 16px;
+  text-align: right;
+  padding-top: 3px;
+}
+
+.tl-year {
+  font-size: 0.82rem;
+  color: var(--year);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.tl-line-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 1px;
+}
+
+.tl-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--year);
+  flex-shrink: 0;
+  margin-top: 4px;
+  margin-left: -5px;
+  z-index: 1;
+}
+
+.tl-vline {
+  flex: 1;
+  width: 1px;
+  background: var(--timeline-line);
+  margin-top: 5px;
+  margin-left: -0.5px;
+}
+
+.tl-entry:last-child .tl-vline { display: none; }
+
+.tl-body {
+  padding-left: 28px;
+  padding-top: 0;
+}
+
+.tl-logo-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.tl-company-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  object-fit: contain;
+  border: 1px solid var(--border);
+  padding: 4px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.tl-body p {
+  font-size: 0.93rem;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+/* Client sub-entry matching the image layout */
+.client-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: 24px;
+  margin-bottom: 14px;
+}
+
+.client-info h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--text);
+}
+
+.client-info h4 a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.client-info h4 a:hover {
+  text-decoration: underline;
+  color: var(--link);
+}
+
+.client-info p {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 6px !important;
+}
+
+/* Tags */
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.tag {
+  background: var(--bg-alt);
+  color: #444;
+  border-radius: 3px;
+  padding: 2px 7px;
+  font-size: 0.73rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+}
+
+/* ── BIO ── */
+.bio-text {
+  font-size: 0.97rem;
+  color: var(--text);
+  line-height: 1.75;
+  max-width: 860px;
+}
+
+/* ── TALKS GRID ── */
+.talks-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.talk-card {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg);
+  text-decoration: none;
+}
+.talk-card:hover { border-color: #999; }
+
+.talk-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  display: block;
+  background: #222;
+}
+
+.talk-card-body {
+  padding: 8px 10px 10px;
+}
+
+.talk-label {
+  font-size: 0.82rem;
+  color: var(--text);
+  line-height: 1.4;
+  display: block;
+}
+
+.talk-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 3px;
+  display: block;
+}
+
+/* ── TEACHING VIDEOS ── */
+.vid-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.vid-card {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  text-decoration: none;
+}
+.vid-card:hover { border-color: #999; }
+
+.vid-thumb-wrap {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: #111;
+  overflow: hidden;
+}
+
+.vid-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.9);
+}
+
+.vid-duration {
+  position: absolute;
+  bottom: 5px;
+  right: 6px;
+  background: rgba(0,0,0,0.8);
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 1px 5px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.vid-body { padding: 7px 9px 8px; }
+.vid-title { font-size: 0.8rem; color: var(--text); line-height: 1.4; margin-bottom: 3px; }
+.vid-meta { font-size: 0.72rem; color: var(--muted); }
+
+/* ── WRITING LIST ── */
+.writing-intro {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 18px;
+  line-height: 1.7;
+}
+
+.writing-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.writing-list li {
+  font-size: 0.93rem;
+  display: flex;
+  gap: 0;
+  align-items: baseline;
+}
+
+.w-date {
+  color: var(--text);
+  min-width: 90px;
+  flex-shrink: 0;
+}
+
+/* ── PET PROJECTS ── */
+.pet-intro {
+  font-size: 0.9rem;
+  color: var(--red);
+  margin-bottom: 22px;
+}
+
+.pet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pet-entry {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+}
+.pet-entry:first-child { border-top: none; }
+
+.pet-thumb {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.pet-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.pet-content { font-size: 0.9rem; color: var(--text); line-height: 1.7; }
+.pet-content a { font-weight: 600; }
+
+/* ── APPRECIATION (CAROUSEL) ── */
+.appreciation-milestones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.appreciation-milestones img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 10px 0;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.6s ease-in-out;
+  will-change: transform;
+}
+
+.appreciation-card {
+  flex: 0 0 calc(33.333% - 14px); /* Show 3 items, account for gap */
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  min-width: 0; /* Prevents overflow issues */
+}
+
+.appreciation-text {
+  font-size: 0.92rem;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.appreciation-author-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--bg-alt);
+  padding-top: 16px;
+}
+
+.appreciation-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: contain;
+  border: 1px solid var(--border);
+  padding: 2px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.appreciation-author-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.appreciation-author-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.appreciation-author-role {
+  font-size: 0.75rem;
+  color: var(--year);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── PUBLICATIONS ── */
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pub-entry {
+  padding: 12px 0 12px 14px;
+  border-left: 3px solid var(--border);
+  margin-bottom: 14px;
+}
+.pub-entry:last-child { margin-bottom: 0; }
+
+.pub-title {
+  font-size: 0.93rem;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.pub-title a { font-weight: 500; }
+
+.pub-venue {
+  font-size: 0.82rem;
+  color: var(--green);
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.pub-authors {
+  font-size: 0.83rem;
+  color: var(--muted);
+}
+
+.pub-note {
+  font-size: 0.83rem;
+  color: var(--muted);
+  margin-top: 16px;
+}
+
+/* ── MISC UNSORTED ── */
+.misc-list {
+  list-style: disc;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.misc-list li { font-size: 0.93rem; color: var(--text); line-height: 1.6; }
+
+/* ── CONTACT ── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 28px;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.contact-item span {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--year);
+  font-weight: 600;
+}
+
+.contact-item p, 
+.contact-item a {
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.contact-item a:hover {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 28px 0 40px;
+  font-size: 0.82rem;
+  color: var(--year);
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .talks-grid { grid-template-columns: repeat(2, 1fr); }
+  .vid-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-grid { grid-template-columns: 1fr 1fr; gap: 14px 20px; }
+  .appreciation-card { flex: 0 0 calc(50% - 10px); } /* Show 2 on tablet */
+}
+
+@media (max-width: 640px) {
+  .page { padding: 0 18px; }
+  .header { flex-direction: column; align-items: center; text-align: center; }
+  .header-socials { justify-content: center; }
+  .header-photo { width: 140px; height: 140px; }
+  .talks-grid { grid-template-columns: 1fr 1fr; }
+  .vid-grid { grid-template-columns: 1fr 1fr; }
+  .tl-entry { grid-template-columns: 64px 1px 1fr; }
+  .pet-entry { grid-template-columns: 70px 1fr; gap: 14px; }
+  .appreciation-milestones { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 12px; }
+  .appreciation-card { flex: 0 0 100%; } /* Show 1 on mobile */
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<div class="page">
+  <div class="header">
+    <img class="header-photo"
+      src="https://raw.githubusercontent.com/dhiraj7kr/digitalDhiraj/refs/heads/main/Project/DKGE.jpeg"
+      alt="Dhiraj Kumar"
+      onerror="this.style.background='#ddd'">
+    <div class="header-info">
+      <h1>Dhiraj Kumar</h1>
+      <p class="header-tagline">I like to build intelligent systems that solve real-world problems 💡 ☁️ 🤖</p>
+      <div class="header-socials">
+        <a class="social-icon" href="https://x.com/Dhiraj7kr" target="_blank" title="X / Twitter">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.736-8.855L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a class="social-icon" href="https://github.com/dhiraj7kr" target="_blank" title="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        </a>
+        <a class="social-icon" href="https://www.linkedin.com/in/dhiraj7kr/" target="_blank" title="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a class="social-icon" href="https://instagram.com/d25.ze" target="_blank" title="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a class="social-icon" href="mailto:dhiraj7kr@gmail.com" title="Email">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+        <a class="social-icon" href="./Project/Resume.pdf" target="_blank" title="Resume / CV">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 1.5L18.5 9H13V3.5zM6 20V4h5v7h7v9H6zm2-5h8v1H8zm0-2h8v1H8zm0-2h5v1H8z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════ EXPERIENCE TIMELINE ══════════════════ -->
+<div class="page">
+  <div class="section">
+    <div class="timeline">
+
+      <!-- Acuvate -->
+      <div class="tl-entry">
+        <div class="tl-year-col">
+          <div class="tl-year">2024 – <br>Present  </div>
+        </div>
+        <div class="tl-line-col">
+          <div class="tl-dot"></div>
+          <div class="tl-vline"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-logo-row">
+            <img class="tl-company-logo"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg8U6ALZQ4JRtSA0c011gX_T1DEr_57OWZZGUYknUwXA&s"
+              onerror="this.style.display='none'"
+              alt="Acuvate Software">
+            <div>
+              <p style="margin:0 0 2px;">At <a href="https://acuvate.com" target="_blank"><strong>ACUVATE Software Pvt. Ltd.</strong></a> as a <strong>Software Engineer</strong>. Delivering enterprise-grade full-stack solutions for global clients in travel, finance, and cruise industries. Specialized in AI integration, Microsoft Copilot Studio, Power Automate, SharePoint (SPFx), .NET/C#, React, Azure, SQL and Python.</p>
+            </div>
+          </div>
+
+          <!-- Holland America Line -->
+          <div class="client-block">
+            <img class="tl-company-logo" src="https://yt3.googleusercontent.com/yDWFM7DnHq3GCvXRb1rdzD3vT7_nPzgMdMlIQDvliAJSVmADlfIiH_50DifJiFaCTZI6eopl=s900-c-k-c0x00ffffff-no-rj" alt="Holland America Line">
+            <div class="client-info">
+              <h4><a href="https://www.hollandamerica.com/en" target="_blank">Holland America Line</a> — ANNA AI Chatbot</h4>
+              <p>Spearheaded development of <strong>ANNA</strong>, an AI-powered travel assistant chatbot. Engineered a high-performance live-agent connector in <strong>.NET/C#</strong> enabling seamless real-time handoffs between AI bots and human support agents. Built frontend interfaces with React and Node.js, integrated Copilot Studio and Power Automate flows, and deployed on <strong>Azure</strong>.</p>
+              <div class="tags">
+                <span class="tag">.NET</span><span class="tag">C#</span><span class="tag">React</span><span class="tag">Node.js</span>
+                <span class="tag">Copilot Studio</span><span class="tag">Power Automate</span><span class="tag">Azure</span><span class="tag">Python</span><span class="tag">JavaScript</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Carnival Corporation -->
+          <div class="client-block">
+            <img class="tl-company-logo" src="https://brandlogos.net/wp-content/uploads/2022/05/carnival_corporation-logo_brandlogos.net_x5814.png" alt="Carnival">
+            <div class="client-info">
+              <h4><a href="https://www.carnival.com/" target="_blank">Carnival Corporation &amp; plc</a> — AI Digital Transformation</h4>
+              <p>Worked on AI-powered digital transformation for the world's largest cruise company. Designed automation workflows in <strong>Power Automate</strong>, built Copilot Studio bots, integrated <strong>Azure AI</strong> services, and delivered Python-based data pipelines. Also managed Excel/SharePoint data infrastructure for operational efficiency.</p>
+              <div class="tags">
+                <span class="tag">Copilot Studio</span><span class="tag">Power Automate</span><span class="tag">Azure AI</span>
+                <span class="tag">Python</span><span class="tag">SharePoint</span><span class="tag">Excel</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- HMA Travel / Bajaj Finance -->
+          <div class="client-block">
+            <img class="tl-company-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPGxe-3ECHUFu4kEFNPhvh3qSg6xErBIrL5vIyvqWpbJ4PzLeSwpcSd71_&s=10" alt="HMA Bajaj">
+            <div class="client-info">
+              <h4><a href="https://www.hmatravel.com" target="_blank">HMA Travel / Bajaj Finance</a> — Flight Booking Portal</h4>
+              <p>Flight Booking Portal for Bajaj Finance employees. Built a <strong>.NET/C# Console App</strong> to synchronize employee booking statuses with the HMA team. Developed full-stack features for the booking portal with React frontend and .NET backend, plus SharePoint (SPFx) integrations and SQL-based reporting on Azure DevOps pipelines.</p>
+              <div class="tags">
+                <span class="tag">.NET</span><span class="tag">C#</span><span class="tag">React</span><span class="tag">SpFx</span>
+                <span class="tag">SharePoint</span><span class="tag">SQL</span><span class="tag">Azure DevOps</span><span class="tag">Python</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Blakes -->
+          <div class="client-block">
+            <img class="tl-company-logo" src="https://techlaw.org/wp-content/uploads/2015/03/Blakes-Canadian-Lawyers-Stacked-RGB.jpg" alt="Blakes">
+            <div class="client-info">
+              <h4><a href="https://www.blakes.com/" target="_blank">Blakes</a> — SharePoint to SQL Migration</h4>
+              <p>Blakes is a leading Canadian law firm with offices in Toronto, Calgary, Vancouver, Montréal, Ottawa, New York and London. Discover the Blakes difference. In this role, I helped to migrate the complex database architecture from <strong>SharePoint</strong> over to <strong>SQL</strong> to ensure robust performance and security.</p>
+              <div class="tags">
+                <span class="tag">SharePoint</span><span class="tag">SQL</span><span class="tag">Database Migration</span>
+              </div>
+            </div>
+          </div>
+
+          <p style="margin-top:10px; font-size:0.82rem; color:var(--muted);">For all the latest, find me on <a href="https://www.linkedin.com/in/dhiraj7kr/" target="_blank">LinkedIn</a> or <a href="https://github.com/dhiraj7kr" target="_blank">GitHub</a>.</p>
+        </div>
+      </div>
+
+      <!-- Bharat Intern -->
+      <div class="tl-entry">
+        <div class="tl-year-col">
+          <div class="tl-year">Oct 2023 –<br>Nov 2023</div>
+        </div>
+        <div class="tl-line-col">
+          <div class="tl-dot"></div>
+          <div class="tl-vline"></div>
+        </div>
+        <div class="tl-body">
+          <p>At <strong>Bharat Intern</strong> as a <strong>Web Developer Intern</strong>. Architected a full-stack <strong>Cruise Management System</strong> using the MERN Stack (MongoDB, Express.js, React, Node.js). Implemented end-to-end features including dynamic trip listings, secure booking workflows, and admin dashboards optimized for responsive performance.</p>
+          <div class="tags">
+            <span class="tag">MongoDB</span><span class="tag">Express.js</span><span class="tag">React</span><span class="tag">Node.js</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="tl-entry">
+        <div class="tl-year-col">
+          <div class="tl-year">2020 –<br>2024</div>
+        </div>
+        <div class="tl-line-col">
+          <div class="tl-dot"></div>
+          <div class="tl-vline"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-logo-row">
+            <img class="tl-company-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQOGmnemR1OprtxI5ylWe-daPJLj2bQNuey1LRpxlhTJMl_uccuDmbQltC&s=10" alt="Jain University">
+            <div>
+              <p><strong>B.Tech in Computer Engineering</strong> from Jain University, Bangalore (2024). Built a strong foundation in algorithms, system design, and software architecture. Got deep into deep learning, computer vision, AI systems, and cloud-native development.</p>
+              <p>Along the way, developed a passion for AI &amp; Copilot Studio, Azure cloud architecture, Python-based data processing, and computer vision. Interned at Bharat Intern in 2023 building full-stack applications.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════ BIO ══════════════════ -->
+<div class="page">
+  <div class="section">
+    <h2 class="section-title">bio</h2>
+    <p class="bio-text">
+      I am a <B>software engineer</B> and <b>AI systems</b> builder specialising in <b>full-stack development</b>  and <b>Python</b> Currently, as a Software Engineer at ACUVATE Software, I develop scalable <b>cloud architectures</b> and enterprise AI solutions for global clients like Carnival Corporation and Bajaj Finance. Notably, I led the development of ANNA—an AI travel assistant chatbot built with <b>Microsoft Copilot Studio</b> for Holland America Line. I hold a B.Tech in <B>Computer Engineering</B> from Jain University, where my work focused on deep learning, computer vision, and end-to-end product development.
+    </p>
+  </div>
+</div>
+
+<!-- ══════════════════ FEATURED TALKS / DEMOS ══════════════════ -->
+<div class="section-alt">
+  <div class="page">
+    <h2 class="section-title">featured talks &amp; demos</h2>
+    <div class="talks-grid">
+
+      <div class="talk-card">
+        <img class="talk-thumb" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=400&q=70" alt="ANNA AI Chatbot">
+        <div class="talk-card-body">
+          <span class="talk-label">ANNA — AI Travel Assistant Chatbot</span>
+          <span class="talk-sub">Holland America Line · 2024–2025</span>
+        </div>
+      </div>
+
+      <div class="talk-card">
+        <img class="talk-thumb" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=70" alt="Carnival AI Transformation">
+        <div class="talk-card-body">
+          <span class="talk-label">AI Digital Transformation</span>
+          <span class="talk-sub">Carnival Corporation · 2024</span>
+        </div>
+      </div>
+
+      <div class="talk-card">
+        <img class="talk-thumb" src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?auto=format&fit=crop&w=400&q=70" alt="Nightingale Song Research">
+        <div class="talk-card-body">
+          <span class="talk-label">Geometry of a Nightingale Song</span>
+          <span class="talk-sub">TDA Research Project · 2024</span>
+        </div>
+      </div>
+
+      <div class="talk-card">
+        <img class="talk-thumb" src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=400&q=70" alt="Duper AIO App">
+        <div class="talk-card-body">
+          <span class="talk-label">Duper AIO — Personal Management App</span>
+          <span class="talk-sub">React Native + Expo · 2024</span>
+        </div>
+      </div>
+
+      <div class="talk-card">
+        <img class="talk-thumb" src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=400&q=70" alt="Reddit Search App">
+        <div class="talk-card-body">
+          <span class="talk-label">Reddit Search Application</span>
+          <span class="talk-sub">React · REST API · 2023</span>
+        </div>
+      </div>
+
+      <div class="talk-card">
+        <img class="talk-thumb" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=70" alt="M2 AI Memory System">
+        <div class="talk-card-body">
+          <span class="talk-label">M2: AI Memory System</span>
+          <span class="talk-sub">LangChain · FAISS · Streamlit · 2024</span>
+        </div>
+      </div>
+
+      <div class="talk-card">
+        <img class="talk-thumb" src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=400&q=70" alt="HMA Flight Booking">
+        <div class="talk-card-body">
+          <span class="talk-label">Flight Booking Portal</span>
+          <span class="talk-sub">HMA / Bajaj Finance · .NET + React · 2024</span>
+        </div>
+      </div>
+
+      <div class="talk-card">
+        <img class="talk-thumb" src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=400&q=70" alt="Cruise Management System">
+        <div class="talk-card-body">
+          <span class="talk-label">Cruise Management System</span>
+          <span class="talk-sub">MERN Stack · Bharat Intern · 2023</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════ TEACHING / OPEN SOURCE ══════════════════ -->
+<div class="page">
+  <div class="section">
+    <h2 class="section-title">teaching &amp; open source</h2>
+    <p style="font-size:0.95rem; color:var(--text); margin-bottom:20px;">
+      I share projects and code on my <a href="https://github.com/dhiraj7kr" target="_blank">GitHub</a>, where I post open-source tools for AI, data analysis, and full-stack development.
+    </p>
+
+    <div class="vid-grid">
+
+      <a class="vid-card" href="https://github.com/dhiraj7kr/Create-Document-Report" target="_blank">
+        <div class="vid-thumb-wrap">
+          <img class="vid-thumb" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrl6NR2rFgmRGVF2ZACMeoMaTzeQop-OiECzdU9TzxNsE_ROC1ibpvSCg&s=10?auto=format&fit=crop&w=400&q=60" alt="Create Document Report">
+          <span class="vid-duration">🤖 AI</span>
+        </div>
+        <div class="vid-body">
+          <div class="vid-title">Create Document Report — Automated AI Research Pipeline</div>
+          <div class="vid-meta">Python · Web Crawling · Ollama · Qwen2.5</div>
+        </div>
+      </a>
+
+      <a class="vid-card" href="https://github.com/dhiraj7kr/DuperAIO" target="_blank">
+        <div class="vid-thumb-wrap">
+          <img class="vid-thumb" src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=400&q=60" alt="Duper AIO">
+          <span class="vid-duration">📱 App</span>
+        </div>
+        <div class="vid-body">
+          <div class="vid-title">Duper AIO — React Native Personal Management</div>
+          <div class="vid-meta">Expo · Node.js · MongoDB</div>
+        </div>
+      </a>
+
+      <a class="vid-card" href="https://github.com/dhiraj7kr/Geometry-of-a-Nightingale-Song" target="_blank">
+        <div class="vid-thumb-wrap">
+          <img class="vid-thumb" src="https://camo.githubusercontent.com/87420c01abdec0dfce0477a1516e9c1032debf173767972a6b2bfe8b69982aed/68747470733a2f2f696d672e796f75747562652e636f6d2f76692f686c6e744d3568387734732f6d617872657364656661756c742e6a7067?auto=format&fit=crop&w=400&q=60" alt="Nightingale Song">
+          <span class="vid-duration">🔬 Research</span>
+        </div>
+        <div class="vid-body">
+          <div class="vid-title">Geometry of a Nightingale Song — TDA Research</div>
+          <div class="vid-meta">Python · Librosa · Topology</div>
+        </div>
+      </a>
+
+      <a class="vid-card" href="https://github.com/dhiraj7kr/Reddit-SearchBar" target="_blank">
+        <div class="vid-thumb-wrap">
+          <img class="vid-thumb" src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=400&q=60" alt="Reddit Search">
+          <span class="vid-duration">⚡ Web</span>
+        </div>
+        <div class="vid-body">
+          <div class="vid-title">Reddit Search Application — Multi-modal</div>
+          <div class="vid-meta">React · REST API · CSS Modules</div>
+        </div>
+      </a>
+
+    </div>
+
+    <p style="font-size:0.92rem; color:var(--text); margin-top:16px;">
+      See all my projects on <a href="https://github.com/dhiraj7kr" target="_blank">github.com/dhiraj7kr</a>.
+    </p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════ FEATURED WRITING ══════════════════ -->
+<div class="section-alt">
+  <div class="page">
+    <h2 class="section-title">featured writing</h2>
+    <p class="writing-intro">
+      I write about AI engineering, full-stack development, and lessons from building production software. See my <a href="https://github.com/dhiraj7kr" target="_blank">GitHub</a> for technical write-ups and project documentation.
+    </p>
+    <ul class="writing-list">
+      <li><span class="w-date">2025</span>&nbsp;&nbsp;<a href="https://github.com/dhiraj7kr" target="_blank">Building ANNA: Deploying an AI Chatbot for 150+ Years Old Cruise Line</a></li>
+      <li><span class="w-date">2025</span>&nbsp;&nbsp;<a href="https://github.com/dhiraj7kr" target="_blank">Real-time Bot-to-Agent Handoff with .NET and Copilot Studio</a></li>
+      <li><span class="w-date">2024</span>&nbsp;&nbsp;<a href="https://github.com/dhiraj7kr/My-Memory-M2" target="_blank">M2: Building a Semantic Memory System with LangChain and FAISS</a></li>
+      <li><span class="w-date">2024</span>&nbsp;&nbsp;<a href="https://github.com/dhiraj7kr" target="_blank">Power Automate at Scale: Enterprise Automation Patterns</a></li>
+      <li><span class="w-date">2024</span>&nbsp;&nbsp;<a href="https://github.com/dhiraj7kr/Geometry-of-a-Nightingale-Song" target="_blank">Geometry of a Nightingale Song — Topological Data Analysis of Birdsong</a></li>
+      <li><span class="w-date">2024</span>&nbsp;&nbsp;<a href="https://github.com/dhiraj7kr" target="_blank">A Practical Guide to SharePoint SPFx Development with React</a></li>
+      <li><span class="w-date">2023</span>&nbsp;&nbsp;<a href="https://github.com/dhiraj7kr/Reddit-SearchBar" target="_blank">Building a Multi-modal Reddit Search App with React and the Reddit API</a></li>
+      <li><span class="w-date">2023</span>&nbsp;&nbsp;<a href="https://github.com/dhiraj7kr/DuperAIO" target="_blank">Duper AIO: Architecture of a Personal Management Ecosystem in React Native</a></li>
+    </ul>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════ PET PROJECTS ══════════════════ -->
+<div class="page">
+  <div class="section">
+    <h2 class="section-title">pet projects</h2>
+    <p class="pet-intro">See my up-to-date projects on my <a href="https://github.com/dhiraj7kr" target="_blank">GitHub</a>.</p>
+
+    <div class="pet-list">
+
+      <div class="pet-entry">
+        <div class="pet-thumb">
+          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=200&q=70" alt="M2">
+        </div>
+        <div class="pet-content">
+          <a href="https://github.com/dhiraj7kr/My-Memory-M2" target="_blank">M2: AI Memory System</a> is a centralized knowledge system powered by embeddings and FAISS. It enables semantic search across tasks, meetings, and PDFs with AI-driven summarization, task generation, and multi-user support via Streamlit. Think of it as a second brain for knowledge workers.
+        </div>
+      </div>
+
+      <div class="pet-entry">
+        <div class="pet-thumb">
+          <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=200&q=70" alt="Duper AIO">
+        </div>
+        <div class="pet-content">
+          <a href="https://github.com/dhiraj7kr/DuperAIO" target="_blank">Duper AIO</a> is a robust personal management ecosystem for productivity, finance, and security. Features gesture-driven UI, secure encrypted storage for private notes, and a modular architecture built for performance. Built with React Native and Expo.
+        </div>
+      </div>
+
+      <div class="pet-entry">
+        <div class="pet-thumb">
+          <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?auto=format&fit=crop&w=200&q=70" alt="Nightingale Song">
+        </div>
+        <div class="pet-content">
+          <a href="https://github.com/dhiraj7kr/Geometry-of-a-Nightingale-Song" target="_blank">Geometry of a Nightingale Song</a> is a research analysis of nightingale vocalizations using geometric and topological data analysis (TDA). Transforms audio into point clouds and manifolds, visualizing structure, motifs, and variability using dimensionality reduction techniques. Related: see the full research writeup on GitHub.
+        </div>
+      </div>
+
+      <div class="pet-entry">
+        <div class="pet-thumb">
+          <img src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=200&q=70" alt="Reddit Search">
+        </div>
+        <div class="pet-content">
+          <a href="https://github.com/dhiraj7kr/Reddit-SearchBar" target="_blank">Reddit Search Application</a> is a powerful multi-modal discovery tool for the Reddit ecosystem. Provides a streamlined, dark-themed interface categorizing results into text, high-resolution images, and curated video feeds using the Reddit API.
+        </div>
+      </div>
+
+      <div class="pet-entry">
+        <div class="pet-thumb" style="display:flex;align-items:center;justify-content:center;background:#f5f5f5;font-size:2rem;">
+          🚢
+        </div>
+        <div class="pet-content">
+          <strong>Cruise Management System</strong> was a full-stack MERN application built during my internship at Bharat Intern. Implemented dynamic trip listings, secure booking workflows, and admin dashboards. This is where I fell in love with end-to-end product development.
+        </div>
+      </div>
+
+      <div class="pet-entry">
+        <div class="pet-thumb" style="display:flex;align-items:center;justify-content:center;background:#f5f5f5;font-size:2rem;">
+          ☁️
+        </div>
+        <div class="pet-content">
+          I also built several misc tools over time: <a href="https://github.com/dhiraj7kr" target="_blank">Azure DevOps automation scripts</a>, Python data pipelines, SharePoint SPFx web parts, and Power Automate flow templates — most used in production for enterprise clients.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════ APPRECIATION ══════════════════ -->
+<div class="section-alt">
+  <div class="page">
+    <h2 class="section-title">appreciation</h2>
+
+    <!-- Infinite Carousel Implementation (Vanilla JS) -->
+    <div class="carousel-container">
+      <div class="carousel-track" id="appreciation-track">
+        
+        <!-- Card 1: HAL -->
+        <div class="appreciation-card">
+          <p class="appreciation-text">
+            "On behalf of the entire Holland America team, I want to extend our heartfelt thanks for your outstanding support... Thanks to your efforts, ANNA has made monumental strides. The progress we’ve achieved together will continue to benefit our guests and team for years to come."
+          </p>
+          <div class="appreciation-author-block">
+            <img class="appreciation-logo" src="https://yt3.googleusercontent.com/yDWFM7DnHq3GCvXRb1rdzD3vT7_nPzgMdMlIQDvliAJSVmADlfIiH_50DifJiFaCTZI6eopl=s900-c-k-c0x00ffffff-no-rj" alt="HAL Logo">
+            <div class="appreciation-author-info">
+              <span class="appreciation-author-name">Max Lieberman</span>
+              <span class="appreciation-author-role">Product Manager, HAL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Acuvate -->
+        <div class="appreciation-card">
+          <p class="appreciation-text">
+            "Your dedication, collaboration, and professionalism continue to drive our success and strengthen our team culture. Thank you for your valuable contributions, and we wish you many more successful years ahead with us."
+          </p>
+          <div class="appreciation-author-block">
+            <img class="appreciation-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg8U6ALZQ4JRtSA0c011gX_T1DEr_57OWZZGUYknUwXA&s" alt="Acuvate Logo">
+            <div class="appreciation-author-info">
+              <span class="appreciation-author-name">Thippa Musturu</span>
+              <span class="appreciation-author-role">Associate Architect, Acuvate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Carnival -->
+        <div class="appreciation-card">
+          <p class="appreciation-text">
+            "Dhiraj’s expertise in AI integrations and cloud workflows has been a game-changer for our operational efficiency. The digital transformations driven by his custom Python data pipelines and Azure infrastructure solutions have modernized how we handle data at scale."
+          </p>
+          <div class="appreciation-author-block">
+            <img class="appreciation-logo" src="https://brandlogos.net/wp-content/uploads/2022/05/carnival_corporation-logo_brandlogos.net_x5814.png" alt="Carnival Logo">
+            <div class="appreciation-author-info">
+              <span class="appreciation-author-name">Digital Transformation</span>
+              <span class="appreciation-author-role">Carnival Corporation &amp; plc</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: HMA Bajaj / Carnival -->
+        <div class="appreciation-card">
+          <p class="appreciation-text">
+            "You have played a steady role in our project delivery, supporting the team in meeting our commitments. We truly appreciate your efforts and look forward to seeing you build further on this foundation in coming year."
+          </p>
+          <div class="appreciation-author-block">
+            <img class="appreciation-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRg8U6ALZQ4JRtSA0c011gX_T1DEr_57OWZZGUYknUwXA&s" alt="Acuvate Logo">
+            <div class="appreciation-author-info">
+              <span class="appreciation-author-name">Prashant H Thakare</span>
+              <span class="appreciation-author-role">Project Manager, Acuvate</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Blakes -->
+        <div class="appreciation-card">
+          <p class="appreciation-text">
+            "We were facing a complex database migration from SharePoint to SQL, and Dhiraj handled it seamlessly. His robust approach ensured our architecture retained top-tier security and performance with zero disruption."
+          </p>
+          <div class="appreciation-author-block">
+            <img class="appreciation-logo" src="https://techlaw.org/wp-content/uploads/2015/03/Blakes-Canadian-Lawyers-Stacked-RGB.jpg" alt="Blakes Logo">
+            <div class="appreciation-author-info">
+              <span class="appreciation-author-name">Database Infrastructure</span>
+              <span class="appreciation-author-role">Blakes Law Firm</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════ PUBLICATIONS / CERTIFICATIONS ══════════════════ -->
+<div class="page">
+  <div class="section">
+    <h2 class="section-title">publications &amp; certifications</h2>
+
+    <div class="pub-list">
+
+      <div class="pub-entry">
+        <div class="pub-title">
+          <a href="https://github.com/dhiraj7kr/Geometry-of-a-Nightingale-Song" target="_blank">Geometry of a Nightingale Song — Topological and Geometric Analysis of Birdsong Vocalizations</a>
+          <span class="pub-venue">Research 2024</span>
+        </div>
+        <div class="pub-authors">Dhiraj Kumar</div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">
+          <a href="https://learn.microsoft.com" target="_blank">Microsoft Certified: Azure Fundamentals (AZ-900)</a>
+          <span class="pub-venue">Microsoft 2024</span>
+        </div>
+        <div class="pub-authors">Dhiraj Kumar</div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">
+          <a href="https://learn.microsoft.com" target="_blank">Microsoft Copilot Studio — Enterprise Deployment</a>
+          <span class="pub-venue">Microsoft 2024</span>
+        </div>
+        <div class="pub-authors">Dhiraj Kumar</div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-title">
+          <a href="https://github.com/dhiraj7kr/My-Memory-M2" target="_blank">M2: AI Memory System — Semantic Search with FAISS and LangChain</a>
+          <span class="pub-venue">Open Source 2024</span>
+        </div>
+        <div class="pub-authors">Dhiraj Kumar</div>
+      </div>
+
+    </div>
+
+    <p class="pub-note">Also on <a href="https://www.linkedin.com/in/dhiraj7kr/" target="_blank">LinkedIn</a> and <a href="https://github.com/dhiraj7kr" target="_blank">GitHub</a>.</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════ MISC UNSORTED ══════════════════ -->
+<div class="section-alt">
+  <div class="page">
+    <h2 class="section-title">misc unsorted</h2>
+    <ul class="misc-list">
+      <li><a href="https://github.com/dhiraj7kr" target="_blank">GitHub repositories</a> — all my open-source projects, tools, and experiments.</li>
+      <li>I am passionate about <a href="https://azure.microsoft.com" target="_blank">Azure cloud architecture</a> and have deployed production systems serving thousands of users across the cruise and finance industries.</li>
+      <li>I led the development of <strong>ANNA</strong>, an AI chatbot for Holland America Line — a 150+ year old cruise brand — bringing it into the modern AI era.</li>
+      <li>I once built a full <a href="https://github.com/dhiraj7kr/Geometry-of-a-Nightingale-Song" target="_blank">topological data analysis of nightingale birdsong</a> just because it sounded fun mathematically. It was.</li>
+      <li>I built a <a href="https://github.com/dhiraj7kr/My-Memory-M2" target="_blank">personal AI memory system (M2)</a> using FAISS and LangChain — essentially a vector-database-backed second brain.</li>
+      <li>Deep interest in <strong>computer vision</strong> (OpenCV), <strong>data science</strong> (Python, Pandas, Streamlit), and the intersection of AI with enterprise software.</li>
+      <li>I believe in writing clean, maintainable code that genuinely solves real-world problems — and in the philosophy that the best software is invisible infrastructure.</li>
+      <li>0 JavaScript frameworks were used to build my mindset: just raw curiosity, caffeine, and a good IDE. This site is pure HTML and CSS and that's it.</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ══════════════════ CONTACT ══════════════════ -->
+
+
+<footer>
+  <div class="page">
+    © 2026 Dhiraj Kumar · Hyderabad, India
+  </div>
+</footer>
+
+<!-- Minimal Vanilla JS Carousel Logic -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const track = document.getElementById('appreciation-track');
+    
+    setInterval(() => {
+      // Get the width of one card plus the grid gap (20px)
+      const firstCard = track.firstElementChild;
+      const slideDistance = firstCard.offsetWidth + 20;
+
+      // Animate sliding to the left
+      track.style.transition = 'transform 0.5s ease-in-out';
+      track.style.transform = `translateX(-${slideDistance}px)`;
+      
+      // Wait for the CSS transition to finish, then snap the first element to the back seamlessly
+      setTimeout(() => {
+        track.style.transition = 'none';
+        track.appendChild(firstCard);
+        track.style.transform = 'translateX(0)';
+      }, 500); // must match the CSS transition duration
+      
+    }, 4500); // Carousel speed (4.5s per slide)
+  });
+</script>
+
+</body>
+</html>

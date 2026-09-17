@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Dhiraj Kumar</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/dhiraj7kr/digitalDhiraj/refs/heads/main/Project/Flower.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="contactcss.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Dhiraj Kumar</a>
+            <div class="nav-links">
+                <a href="about.html">About</a>
+                <a href="project.html">Projects</a>
+                <a href="experience.html">Experience</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+            <div class="hamburger" id="hamburger-btn">
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </nav>
+    <div class="mobile-menu-overlay" id="mobile-menu">
+        <a href="about.html" class="mobile-link">About</a>
+        <a href="project.html" class="mobile-link">Projects</a>
+        <a href="experience.html" class="mobile-link">Experience</a>
+        <a href="contact.html" class="mobile-link">Contact</a>
+    </div>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                
+                <div class="info-card">
+                    <h2>Get in Touch</h2>
+                    <p class="info-text">
+                        I am always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                    </p>
+
+                    <div class="contact-list">
+                        <div class="contact-item">
+                            <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                            <div class="contact-details">
+                                <h3>Location</h3>
+                                <p>Hyderabad, Telangana, India</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="icon-box"><i class="fas fa-envelope"></i></div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <a href="mailto:dhirajkr.tech@gmail.com">dhirajkr.tech@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
+                            <div class="contact-details">
+                                <h3>Phone</h3>
+                                <a href="tel:+919472826071">+91 9472 8260 71</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="map-container">
+                        <iframe 
+                            class="map-frame"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d243647.3160407062!2d78.26795895786377!3d17.412299800612457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb99daeaebd2c7%3A0xae93b78392bafbc2!2sHyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="form-card">
+                    <form id="contact-form" action="https://formspree.io/f/xnjjveza" method="POST">
+                        <div class="form-group-row">
+                            <div class="form-group">
+                                <label class="form-label">Your Name</label>
+                                <input type="text" name="name" class="form-input" placeholder="Dhiraj Kumar" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Your Email</label>
+                                <input type="email" name="email" class="form-input" placeholder="dhiraj@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Subject</label>
+                            <input type="text" name="subject" class="form-input" placeholder="Project Inquiry" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Message</label>
+                            <textarea name="message" class="form-textarea" placeholder="Type your message here..." required></textarea>
+                        </div>
+
+                        <p id="form-status" style="margin-bottom: 15px; font-size: 0.9rem; min-height: 20px;"></p>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </form>
+
+                    <div class="form-divider">Or connect via</div>
+
+                    <div class="social-grid">
+                        <a href="https://linkedin.com/in/dhiraj7kr" target="_blank" class="social-card">
+                            <i class="fab fa-linkedin-in"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/dhiraj7kr" target="_blank" class="social-card">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://instagram.com/dhiraj7kr" target="_blank" class="social-card">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <a href="https://twitter.com/dhiraj7kr" target="_blank" class="social-card">
+                            <i class="fab fa-twitter"></i>
+                            <span>Twitter</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer><p>© 2026 Dhiraj Kumar.</p></footer>
+    <script src="script.js"></script>
+
+    <script>
+        const form = document.getElementById("contact-form");
+        
+        async function handleSubmit(event) {
+            event.preventDefault();
+            const status = document.getElementById("form-status");
+            const btn = form.querySelector('.submit-btn');
+            const originalBtnText = btn.innerHTML;
+
+            btn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Sending...";
+            btn.disabled = true;
+            status.innerHTML = "";
+
+            const data = new FormData(event.target);
+
+            fetch(event.target.action, {
+                method: form.method,
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    status.innerHTML = "Message sent successfully!";
+                    status.style.color = "#4caf50";
+                    form.reset();
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            status.innerHTML = "Oops! There was a problem submitting your form";
+                        }
+                        status.style.color = "#f44336";
+                    })
+                }
+            }).catch(error => {
+                status.innerHTML = "Oops! There was a problem submitting your form";
+                status.style.color = "#f44336";
+            }).finally(() => {
+                btn.innerHTML = originalBtnText;
+                btn.disabled = false;
+            });
+        }
+        form.addEventListener("submit", handleSubmit);
+    </script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+/* --- contactcss.css --- */
+
+/* 1. LAYOUT GRID */
+.contact-section {
+    padding: 120px 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 40px;
+    align-items: start;
+}
+
+/* 2. SHARED CARD STYLING */
+.info-card, .form-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+}
+
+/* 3. LEFT COLUMN: INFO & MAP */
+.info-card h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    background: linear-gradient(180deg, #fff 0%, #bca1f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.info-text {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+/* Contact List (Location/Phone) */
+.contact-list {
+    margin-bottom: 32px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding: 12px;
+    border-radius: 12px;
+    transition: background 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    background: rgba(41, 151, 255, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.contact-details h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.contact-details p, .contact-details a {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Map Container */
+.map-container {
+    width: 100%;
+    height: 250px; /* Increased height for better visibility */
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: auto;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.map-frame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    filter: grayscale(100%) invert(92%) contrast(83%);
+}
+
+/* 4. RIGHT COLUMN: FORM & SOCIALS */
+.form-group-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group { margin-bottom: 20px; }
+
+.form-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.form-input, .form-textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus, .form-textarea:focus {
+    border-color: var(--accent);
+    background: rgba(41, 151, 255, 0.05);
+}
+
+.form-textarea { resize: vertical; min-height: 140px; }
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    background: var(--text-primary);
+    color: #000;
+    font-weight: 600;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Space between text and icon */
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.15);
+}
+
+/* Divider "OR" */
+.form-divider {
+    text-align: center;
+    margin: 30px 0 20px;
+    position: relative;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-divider::before, .form-divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 35%; /* Length of the line */
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.form-divider::before { left: 0; }
+.form-divider::after { right: 0; }
+
+/* Social Grid (Now Below Form) */
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 in a row */
+    gap: 12px;
+}
+
+.social-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    text-decoration: none;
+}
+
+.social-card i {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+.social-card span {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.social-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.social-card:hover span { color: var(--text-primary); }
+.social-card:hover .fa-linkedin-in { color: #0077b5; }
+.social-card:hover .fa-github { color: #fff; }
+.social-card:hover .fa-instagram { color: #E1306C; }
+.social-card:hover .fa-twitter { color: #1DA1F2; }
+
+
+/* 5. RESPONSIVE */
+@media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .social-grid { grid-template-columns: repeat(4, 1fr); }
+    .form-group-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 500px) {
+    .social-grid { grid-template-columns: repeat(2, 1fr); } /* 2x2 on small screens */
+}

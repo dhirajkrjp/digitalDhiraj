@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhiraj Kumar — Full Stack Engineer</title>
+<link rel="icon" type="image/png" href="logo.png"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ============================================================
+   TOKENS & THEME
+   ============================================================ */
+:root {
+  --accent:      #E8651A;
+  --accent-warm: #C4501A;
+  --brown:       #3D2B1F;
+  --white:       #F5F2EE;
+  --off-white:   #EAE6DF;
+  --gray-lt:     #B0A898;
+  --gray-md:     #6E6358;
+  --border:      rgba(255,255,255,0.08);
+  --radius:      12px;
+  --ease:        cubic-bezier(0.22,1,0.36,1);
+
+  /* dark default */
+  --bg:          #0D0C0B;
+  --bg2:         #161410;
+  --bg3:         #1E1B17;
+  --surface:     #211E19;
+  --text:        #F5F2EE;
+  --text-muted:  #857B6F;
+  --nav-bg:      rgba(13,12,11,0.92);
+  --card-bg:     #1A1714;
+  --card-border: rgba(255,255,255,0.06);
+  --tag-bg:      rgba(232,101,26,0.12);
+  --tag-color:   #E8651A;
+  --invert-logo: 0;
+}
+[data-theme="light"] {
+  --bg:          #F5F2EE;
+  --bg2:         #EDE9E2;
+  --bg3:         #E4DDD3;
+  --surface:     #FFFFFF;
+  --text:        #1A1714;
+  --text-muted:  #7A6F62;
+  --nav-bg:      rgba(245,242,238,0.92);
+  --card-bg:     #FFFFFF;
+  --card-border: rgba(0,0,0,0.08);
+  --border:      rgba(0,0,0,0.08);
+  --tag-bg:      rgba(232,101,26,0.10);
+  --tag-color:   #C4501A;
+  --invert-logo: 0;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  overflow-x:hidden;
+  transition:background 0.4s,color 0.4s;
+}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* ============================================================
+   CURSOR DOT
+   ============================================================ */
+.cursor{
+  width:10px;height:10px;
+  background:var(--accent);
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.1s,width 0.3s,height 0.3s,opacity 0.3s;
+  mix-blend-mode:exclusion;
+}
+.cursor.grow{width:32px;height:32px;opacity:0.6}
+@media(pointer:coarse){.cursor{display:none}}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  backdrop-filter:blur(20px);
+  background:var(--nav-bg);
+  border-bottom:1px solid var(--border);
+  transition:background 0.4s;
+}
+.nav-inner{
+  max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;
+  padding:0 32px;height:64px;
+  gap:24px;
+}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;letter-spacing:0.08em;
+  color:var(--accent);
+  flex-shrink:0;
+}
+.nav-links{
+  display:flex;gap:4px;margin-left:auto;
+}
+.nav-links a{
+  padding:6px 14px;
+  border-radius:6px;
+  font-size:0.85rem;
+  font-weight:500;
+  color:var(--text-muted);
+  transition:color 0.2s,background 0.2s;
+}
+.nav-links a:hover{color:var(--text);background:var(--bg3)}
+.nav-controls{display:flex;align-items:center;gap:8px;margin-left:12px}
+
+/* Language picker */
+.lang-btn{
+  display:flex;align-items:center;gap:5px;
+  padding:5px 10px;border-radius:6px;
+  font-size:0.78rem;font-weight:600;
+  color:var(--text-muted);
+  border:1px solid var(--border);
+  background:var(--bg3);
+  transition:all 0.2s;
+  cursor:pointer;
+}
+.lang-btn:hover,.lang-btn.active{
+  color:var(--accent);border-color:var(--accent);
+}
+.lang-dropdown{
+  position:relative;
+}
+.lang-menu{
+  display:none;
+  position:absolute;top:calc(100% + 8px);right:0;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  min-width:140px;
+  box-shadow:0 16px 40px rgba(0,0,0,0.4);
+  z-index:1000;
+}
+.lang-dropdown.open .lang-menu{display:block}
+.lang-opt{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 14px;
+  font-size:0.82rem;font-weight:500;
+  color:var(--text-muted);
+  cursor:pointer;
+  transition:background 0.15s,color 0.15s;
+}
+.lang-opt:hover,.lang-opt.active{
+  background:var(--bg3);color:var(--accent);
+}
+.flag{font-size:1.1rem}
+
+/* Theme toggle */
+.theme-btn{
+  width:36px;height:36px;
+  border-radius:8px;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  color:var(--text-muted);
+  font-size:0.95rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;
+}
+.theme-btn:hover{color:var(--accent);border-color:var(--accent)}
+
+/* Hamburger */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  width:36px;height:36px;
+  border-radius:8px;background:var(--bg3);
+  border:1px solid var(--border);
+  align-items:center;justify-content:center;
+  cursor:pointer;
+}
+.hamburger span{
+  display:block;width:18px;height:2px;
+  background:var(--text-muted);
+  border-radius:2px;
+  transition:all 0.3s var(--ease);
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile menu */
+.mobile-menu{
+  display:none;
+  position:fixed;inset:0;z-index:800;
+  background:var(--bg);
+  padding:80px 32px 32px;
+  flex-direction:column;gap:4px;
+}
+.mobile-menu.open{display:flex}
+.mobile-link{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.8rem;letter-spacing:0.05em;
+  color:var(--text-muted);
+  padding:8px 0;
+  border-bottom:1px solid var(--border);
+  transition:color 0.2s,padding 0.2s;
+}
+.mobile-link:hover{color:var(--accent);padding-left:12px}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  position:relative;
+  overflow:hidden;
+  padding:120px 32px 80px;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(232,101,26,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(61,43,31,0.3) 0%, transparent 60%);
+  pointer-events:none;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+  opacity:0.4;
+}
+.hero-inner{max-width:1280px;margin:0 auto;width:100%;position:relative}
+.hero-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.78rem;
+  color:var(--accent);
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:10px;
+}
+.hero-eyebrow::before{
+  content:'';display:block;
+  width:40px;height:1px;background:var(--accent);
+}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4rem,12vw,10rem);
+  line-height:0.92;
+  letter-spacing:-0.01em;
+  color:var(--text);
+  margin-bottom:32px;
+}
+.hero-title span{color:var(--accent)}
+.hero-desc{
+  max-width:520px;
+  font-size:1.05rem;
+  color:var(--text-muted);
+  line-height:1.8;
+  margin-bottom:48px;
+}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 28px;border-radius:8px;
+  font-size:0.88rem;font-weight:600;
+  letter-spacing:0.03em;
+  transition:all 0.25s var(--ease);
+  position:relative;overflow:hidden;
+}
+.btn-primary{
+  background:var(--accent);color:#fff;
+}
+.btn-primary:hover{background:var(--accent-warm);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,101,26,0.35)}
+.btn-outline{
+  background:transparent;color:var(--text);
+  border:1px solid var(--border);
+}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.hero-scroll{
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.scroll-line{
+  width:1px;height:60px;
+  background:linear-gradient(to bottom, var(--accent), transparent);
+  animation:scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse{0%,100%{opacity:0.3}50%{opacity:1}}
+.scroll-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.65rem;letter-spacing:0.15em;
+  color:var(--text-muted);text-transform:uppercase;
+}
+
+/* Hero stats */
+.hero-stats{
+  display:flex;gap:40px;margin-top:56px;
+  flex-wrap:wrap;
+}
+.stat-item{border-left:2px solid var(--accent);padding-left:16px}
+.stat-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.2rem;color:var(--text);
+  line-height:1;
+}
+.stat-label{
+  font-size:0.78rem;color:var(--text-muted);
+  text-transform:uppercase;letter-spacing:0.1em;
+  margin-top:4px;
+}
+
+/* ============================================================
+   SECTION SHELL
+   ============================================================ */
+.section{
+  padding:120px 32px;
+  max-width:1280px;margin:0 auto;
+}
+.section-full{
+  padding:120px 0;
+  background:var(--bg2);
+}
+.section-full .section{padding-top:0;padding-bottom:0}
+.s-eyebrow{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.72rem;letter-spacing:0.2em;
+  color:var(--accent);text-transform:uppercase;
+  margin-bottom:12px;
+  display:flex;align-items:center;gap:10px;
+}
+.s-eyebrow::before{content:'';width:30px;height:1px;background:var(--accent)}
+.s-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.5rem,6vw,5rem);
+  line-height:0.95;
+  margin-bottom:20px;
+  color:var(--text);
+}
+.s-subtitle{
+  font-size:1rem;
+  color:var(--text-muted);
+  max-width:500px;
+  line-height:1.7;
+}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+  margin-top:64px;
+}
+.about-photo-wrap{
+  position:relative;
+}
+.about-photo-frame{
+  aspect-ratio:4/5;
+  border-radius:var(--radius);
+  overflow:hidden;
+  position:relative;
+  background:var(--bg3);
+}
+.about-photo-frame img{
+  width:100%;height:100%;
+  object-fit:cover;
+  filter:grayscale(20%);
+  transition:filter 0.4s;
+}
+.about-photo-frame:hover img{filter:grayscale(0)}
+.about-photo-accent{
+  position:absolute;
+  bottom:-20px;right:-20px;
+  width:120px;height:120px;
+  border-radius:12px;
+  background:var(--accent);
+  z-index:-1;
+}
+.about-photo-tag{
+  position:absolute;
+  bottom:20px;left:20px;
+  background:rgba(13,12,11,0.85);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:10px 16px;
+  font-size:0.78rem;
+  color:var(--text-muted);
+  font-family:'JetBrains Mono',monospace;
+}
+.about-photo-tag strong{display:block;color:var(--accent);font-size:1rem;margin-bottom:2px}
+.about-bio p{
+  font-size:1rem;
+  color:var(--text-muted);
+  line-height:1.85;
+  margin-bottom:20px;
+}
+.about-bio strong{color:var(--text)}
+.about-bio .hi{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;
+  color:var(--accent);
+  display:block;
+  margin-bottom:24px;
+}
+.skills-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:16px;
+  margin-top:48px;
+}
+.skill-card{
+  background:var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius:var(--radius);
+  padding:20px;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.skill-card:hover{border-color:var(--accent);transform:translateY(-4px)}
+.skill-card h4{
+  font-size:0.72rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:14px;
+  font-family:'JetBrains Mono',monospace;
+}
+.skill-tag{
+  display:inline-flex;
+  align-items:center;gap:5px;
+  background:var(--tag-bg);
+  color:var(--tag-color);
+  border-radius:4px;
+  padding:4px 8px;
+  font-size:0.75rem;
+  font-weight:600;
+  margin:3px 3px 3px 0;
+}
+
+/* ============================================================
+   EXPERIENCE / TIMELINE
+   ============================================================ */
+.timeline{
+  position:relative;
+  margin-top:64px;
+}
+.timeline::before{
+  content:'';
+  position:absolute;left:0;top:0;bottom:0;
+  width:1px;
+  background:linear-gradient(to bottom, var(--accent), transparent 90%);
+}
+.tl-item{
+  padding-left:40px;
+  margin-bottom:64px;
+  position:relative;
+  opacity:0;transform:translateY(30px);
+  transition:opacity 0.6s var(--ease),transform 0.6s var(--ease);
+}
+.tl-item.visible{opacity:1;transform:none}
+.tl-dot{
+  position:absolute;left:-6px;top:6px;
+  width:13px;height:13px;
+  border-radius:50%;
+  background:var(--accent);
+  border:2px solid var(--bg);
+  box-shadow:0 0 0 4px rgba(232,101,26,0.2);
+}
+.tl-company-row{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:10px;
+}
+.company-logo{
+  width:44px;height:44px;
+  border-radius:8px;
+  object-fit:contain;
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:4px;
+  flex-shrink:0;
+}
+.tl-company{
+  font-size:0.78rem;
+  color:var(--accent);
+  letter-spacing:0.08em;
+  font-weight:600;
+  text-transform:uppercase;
+}
+.tl-company a{color:inherit;transition:opacity 0.2s}
+.tl-company a:hover{opacity:0.7}
+.tl-role{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.8rem;
+  color:var(--text);
+  margin-bottom:6px;
+  letter-spacing:0.02em;
+}
+.tl-date{
+  font-family:'JetBrains Mono',monospace;
+  font-size:0.75rem;
+  color:var(--text-muted);
+  margin-bottom:16px;
+}
+.tl-desc{
+  font-size:0.95rem;
+  color:var(--text-muted);
+  line-height:1.8;
+  max-width:680px;
+  margin-bottom:20px;
+}
+.tl-desc strong{color:var(--text)}
+
+/* Client sub-cards */
+.client-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:14px;
+  margin-top:20px;
+}
+.client-card{
+  background:var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius:var(--radius);
+  padding:18px;
+  transition:border-color 0.3s,transform 0.3s;
+}
+.client-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.client-card-header{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:10px;
+}
+.client-logo{
+  width:36px;height:36px;
+  border-radius:6px;
+  object-fit:contain;
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:3px;
+  flex-shrink:0;
+}
+.client-name{
+  font-size:0.82rem;font-weight:700;
+  color:var(--text);
+}
+.client-sub{
+  font-size:0.7rem;color:var(--text-muted);
+}
+.client-desc{
+  font-size:0.82rem;
+  color:var(--text-muted);
+  line-height:1.7;
+  margin-bottom:10px;
+}
+.tech-row{display:flex;flex-wrap:wrap;gap:4px}
+.tech-pill{
+  background:var(--tag-bg);
+  color:var(--tag-color);
+  border-radius:4px;
+  padding:2px 7px;
+  font-size:0.7rem;font-weight:600;
+}
+
+/* ============================================================
+   PROJECTS
+   ============================================================ */
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:24px;
+  margin-top:64px;
+}
+.proj-card{
+  background:var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius:16px;
+  overflow:hidden;
+  transition:transform 0.35s var(--ease),border-color 0.3s,box-shadow 0.35s;
+  display:flex;flex-direction:column;
+}
+.proj-card:hover{
+  transform:translateY(-8px);
+  border-color:var(--accent);
+  box-shadow:0 24px 60px rgba(0,0,0,0.4),0 0 0 1px rgba(232,101,26,0.2);
+}
+.proj-img{
+  aspect-ratio:16/9;
+  overflow:hidden;
+  position:relative;
+}
+.proj-img img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform 0.5s var(--ease);
+  filter:grayscale(30%);
+}
+.proj-card:hover .proj-img img{transform:scale(1.06);filter:grayscale(0)}
+.proj-body{padding:24px;flex:1;display:flex;flex-direction:column}
+.proj-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.5rem;letter-spacing:0.02em;
+  color:var(--text);margin-bottom:10px;
+}
+.proj-desc{
+  font-size:0.88rem;color:var(--text-muted);
+  line-height:1.75;flex:1;margin-bottom:18px;
+}
+.proj-footer{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:auto;
+}
+.proj-link{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:0.82rem;font-weight:600;
+  color:var(--accent);
+  transition:gap 0.2s;
+}
+.proj-link:hover{gap:10px}
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-wrap{
+  display:grid;
+  grid-template-columns:1fr 1.1fr;
+  gap:64px;
+  align-items:start;
+  margin-top:64px;
+}
+.contact-info h3{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.5rem;color:var(--text);
+  margin-bottom:16px;
+}
+.contact-info p{
+  font-size:0.95rem;color:var(--text-muted);
+  line-height:1.8;margin-bottom:32px;
+}
+.contact-items{display:flex;flex-direction:column;gap:16px;margin-bottom:40px}
+.ci{
+  display:flex;align-items:center;gap:14px;
+}
+.ci-icon{
+  width:44px;height:44px;
+  border-radius:10px;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--accent);font-size:1rem;
+  flex-shrink:0;
+}
+.ci-text{font-size:0.88rem;color:var(--text-muted)}
+.ci-text strong{display:block;color:var(--text);font-size:0.8rem;margin-bottom:2px;font-weight:600}
+.ci-text a{color:var(--text-muted);transition:color 0.2s}
+.ci-text a:hover{color:var(--accent)}
+.socials{display:flex;gap:10px;flex-wrap:wrap}
+.social-btn{
+  width:44px;height:44px;
+  border-radius:10px;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-muted);font-size:1rem;
+  transition:all 0.2s;
+}
+.social-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-3px)}
+
+/* Form */
+.contact-form{
+  background:var(--card-bg);
+  border:1px solid var(--card-border);
+  border-radius:16px;
+  padding:36px;
+}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-group{margin-bottom:14px}
+.form-label{
+  display:block;
+  font-size:0.75rem;font-weight:600;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--text-muted);
+  margin-bottom:6px;
+}
+.form-input,.form-textarea{
+  width:100%;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:12px 14px;
+  font-size:0.9rem;
+  font-family:'DM Sans',sans-serif;
+  color:var(--text);
+  outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text-muted)}
+.form-input:focus,.form-textarea:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(232,101,26,0.15);
+}
+.form-textarea{resize:vertical;min-height:130px}
+.form-status{
+  font-size:0.85rem;min-height:22px;
+  margin-bottom:10px;
+}
+.submit-btn{
+  width:100%;
+  background:var(--accent);
+  color:#fff;
+  border-radius:8px;
+  padding:14px;
+  font-size:0.9rem;font-weight:700;
+  letter-spacing:0.05em;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all 0.25s var(--ease);
+}
+.submit-btn:hover{background:var(--accent-warm);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,101,26,0.35)}
+.submit-btn:disabled{opacity:0.6;transform:none;pointer-events:none}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{
+  padding:40px 32px;
+  border-top:1px solid var(--border);
+  text-align:center;
+}
+.footer-inner{
+  max-width:1280px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.footer-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.3rem;letter-spacing:0.08em;
+  color:var(--accent);
+}
+.footer-text{
+  font-size:0.8rem;color:var(--text-muted);
+}
+.footer-links{display:flex;gap:20px}
+.footer-links a{
+  font-size:0.8rem;color:var(--text-muted);
+  transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--accent)}
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+.divider{
+  width:100%;height:1px;
+  background:var(--border);
+  margin:0 auto;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+.fade-up{
+  opacity:0;transform:translateY(40px);
+  transition:opacity 0.7s var(--ease),transform 0.7s var(--ease);
+}
+.fade-up.visible{opacity:1;transform:none}
+.fade-up:nth-child(2){transition-delay:0.1s}
+.fade-up:nth-child(3){transition-delay:0.2s}
+.fade-up:nth-child(4){transition-delay:0.3s}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1024px){
+  .about-grid{grid-template-columns:1fr;gap:48px}
+  .about-photo-wrap{max-width:400px}
+  .contact-wrap{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero-title{font-size:clamp(3rem,15vw,6rem)}
+  .section{padding:80px 20px}
+  .section-full{padding:80px 0}
+  .projects-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:1fr}
+  .client-cards{grid-template-columns:1fr}
+  .hero-stats{gap:24px}
+  .contact-form{padding:24px}
+  .footer-inner{flex-direction:column;text-align:center}
+  .footer-links{justify-content:center}
+  .lang-btn span.lang-name{display:none}
+}
+@media(max-width:480px){
+  .nav-inner{padding:0 16px}
+  .hero{padding:100px 20px 60px}
+  .hero-btns{flex-direction:column}
+  .btn{width:100%;justify-content:center}
+}
+
+/* ============================================================
+   NOISE OVERLAY
+   ============================================================ */
+body::after{
+  content:'';
+  position:fixed;inset:0;
+  pointer-events:none;
+  z-index:9990;
+  opacity:0.025;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size:150px;
+}
+
+/* Active nav link */
+.nav-links a.active-nav{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+
+<!-- ====== NAV ====== -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">DHIRAJ KUMAR.</a>
+    <div class="nav-links" id="nav-links">
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#experience" data-i18n="nav.experience">Experience</a>
+      <a href="#projects" data-i18n="nav.projects">Projects</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </div>
+    <div class="nav-controls">
+      <!-- Language -->
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-btn" id="langBtn">
+          <span class="flag" id="currentFlag">🇬🇧</span>
+          <span class="lang-name" id="currentLang">EN</span>
+          <i class="fas fa-chevron-down" style="font-size:0.6rem"></i>
+        </button>
+        <div class="lang-menu" id="langMenu">
+          <div class="lang-opt active" data-lang="en"><span class="flag">🇬🇧</span> English</div>
+          <div class="lang-opt" data-lang="de"><span class="flag">🇩🇪</span> Deutsch</div>
+          <div class="lang-opt" data-lang="fr"><span class="flag">🇫🇷</span> Français</div>
+          <div class="lang-opt" data-lang="es"><span class="flag">🇪🇸</span> Español</div>
+        </div>
+      </div>
+      <!-- Theme -->
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">
+        <i class="fas fa-sun" id="themeIcon"></i>
+      </button>
+      <!-- Hamburger -->
+      <div class="hamburger" id="hamburger" role="button" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mobile-link" data-i18n="nav.about" onclick="closeMenu()">About</a>
+  <a href="#experience" class="mobile-link" data-i18n="nav.experience" onclick="closeMenu()">Experience</a>
+  <a href="#projects" class="mobile-link" data-i18n="nav.projects" onclick="closeMenu()">Projects</a>
+  <a href="#contact" class="mobile-link" data-i18n="nav.contact" onclick="closeMenu()">Contact</a>
+</div>
+
+<!-- ====== HERO ====== -->
+<section id="home" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">Ready to Relocate.</div>
+    <h1 class="hero-title">
+      <span>Full Stack</span><br>Engineer.
+    </h1>
+    <p class="hero-desc" data-i18n="hero.desc">
+      Crafting enterprise-grade software solutions with <strong>.NET, React, Azure</strong> and AI. Building intelligent systems that scale across industries and continents.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary"><i class="fas fa-arrow-right"></i> <span data-i18n="hero.btn.work">View My Work</span></a>
+      <a href="#contact" class="btn btn-outline"><span data-i18n="hero.btn.contact">Get In Touch</span></a>
+      <a href="./Project/Resume.pdf" target="_blank" class="btn btn-outline"><i class="fas fa-file-pdf"></i> <span data-i18n="hero.btn.resume">Resume</span></a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num" id="expYears">1+</div>
+        <div class="stat-label" data-i18n="hero.stat.exp">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3+</div>
+        <div class="stat-label" data-i18n="hero.stat.clients">Enterprise Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">10+</div>
+        <div class="stat-label" data-i18n="hero.stat.tech">Technologies</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4+</div>
+        <div class="stat-label" data-i18n="hero.stat.projects">Open Source Projects</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <div class="scroll-label">scroll</div>
+  </div>
+</section>
+
+<!-- ====== ABOUT ====== -->
+<div class="section-full" id="about">
+  <div class="section">
+    <div class="s-eyebrow" data-i18n="about.eyebrow">Who I Am</div>
+    <h2 class="s-title" data-i18n="about.title">About Me.</h2>
+    <div class="about-grid">
+      <div class="about-photo-wrap fade-up">
+        <div class="about-photo-frame">
+          <img src="https://raw.githubusercontent.com/dhiraj7kr/digitalDhiraj/refs/heads/main/Project/DKGE.jpeg?auto=format&fit=crop&w=600&q=80" alt="Dhiraj Kumar">
+          <div class="about-photo-tag">
+            <strong>Software Engineer</strong>
+            Full Stack Developer | AI Enthusiast | Cloud Architect
+          </div>
+        </div>
+        <div class="about-photo-accent"></div>
+      </div>
+      <div class="about-bio fade-up">
+        <span class="hi">Hello! 👋</span>
+        <p data-i18n="about.p1">
+          I am <strong>Dhiraj Kumar</strong>, a Software Engineer based in Hyderabad, India. I hold a <strong>B.Tech in Computer Engineering</strong> from Jain University, Bangalore (2024), where I built a strong foundation in algorithms, system design, and software architecture.
+        </p>
+        <p data-i18n="about.p2">
+          Currently at <strong>ACUVATE Software Pvt. Ltd.</strong>, I drive AI-powered enterprise solutions for global clients including <strong>Carnival Corporation, Holland America Line,</strong> and <strong>HMA (Bajaj Finance)</strong>. I work across the full stack — from robust backends in <strong>.NET &amp; C#</strong> to intuitive frontends using <strong>React &amp; SharePoint</strong>.
+        </p>
+        <p data-i18n="about.p3">
+          Beyond code, I have a deep passion for <strong>AI &amp; Copilot Studio</strong>, <strong>Azure cloud architecture</strong>, <strong>Python-based data processing</strong>, and <strong>computer vision</strong>. I believe in writing clean, maintainable code that genuinely solves real-world problems.
+        </p>
+        <div class="skills-grid">
+          <div class="skill-card fade-up">
+            <h4 data-i18n="skills.languages">Languages</h4>
+            <span class="skill-tag">C# / .NET</span>
+            <span class="skill-tag">Java 17+</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML/CSS</span>
+          </div>
+          <div class="skill-card fade-up">
+            <h4 data-i18n="skills.backend">Backend & Cloud</h4>
+            <span class="skill-tag">Azure</span>
+            <span class="skill-tag">SQL Server</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">Spring Boot</span>
+            <span class="skill-tag">Node.js</span>
+          </div>
+          <div class="skill-card fade-up">
+            <h4 data-i18n="skills.frontend">Frontend & AI</h4>
+            <span class="skill-tag">React.js</span>
+            <span class="skill-tag">SpFx</span>
+            <span class="skill-tag">SharePoint</span>
+            <span class="skill-tag">Copilot Studio</span>
+            <span class="skill-tag">Power Automate</span>
+          </div>
+          <div class="skill-card fade-up">
+            <h4 data-i18n="skills.tools">Tools & DevOps</h4>
+            <span class="skill-tag">Azure DevOps</span>
+            <span class="skill-tag">Git & GitHub</span>
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">OpenCV</span>
+            <span class="skill-tag">LangChain</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== EXPERIENCE ====== -->
+<div id="experience" class="section">
+  <div class="s-eyebrow" data-i18n="exp.eyebrow">Career Path</div>
+  <h2 class="s-title" data-i18n="exp.title">Experience.</h2>
+  <p class="s-subtitle" data-i18n="exp.subtitle">Professional journey — enterprise software, AI systems, and full-stack development across global clients.</p>
+
+  <div class="timeline">
+
+    <!-- ACUVATE -->
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-company-row">
+        <img class="company-logo"
+          src="https://acuvate.com/wp-content/uploads/2021/04/acuvate_Logo.png"
+          onerror="this.style.display='none'"
+          alt="Acuvate">
+        <div>
+          <div class="tl-company"><a href="https://acuvate.com" target="_blank">ACUVATE Software Pvt. Ltd.</a></div>
+          <div class="tl-role" data-i18n="exp.acuvate.role">Software Engineer</div>
+        </div>
+      </div>
+      <div class="tl-date">
+        <i class="fas fa-calendar-alt" style="color:var(--accent)"></i>&nbsp;
+        Aug 2024 – Present &nbsp;<span id="acuvateDuration" style="color:var(--accent)"></span>
+      </div>
+      <p class="tl-desc" data-i18n="exp.acuvate.desc">
+        Delivering enterprise-grade full-stack solutions for global clients in the travel, finance, and cruise industries. Specialized in <strong>AI integration, Microsoft Copilot Studio, Power Automate, SharePoint (SPFx), .NET/C#, React, Azure, SQL</strong> and Python. All client work listed below is delivered through ACUVATE Software.
+      </p>
+
+      <!-- Client cards -->
+      <div class="client-cards">
+
+        <!-- HMA / Bajaj Finance -->
+        <div class="client-card fade-up">
+          <div class="client-card-header">
+            <img class="client-logo"
+              src="https://raw.githubusercontent.com/dhiraj7kr/digitalDhiraj/main/CompanyLogo/HMALogo.png"
+              onerror="this.src='https://via.placeholder.com/36?text=HMA'"
+              alt="HMA">
+            <div>
+              <div class="client-name">HMA Travel</div>
+              <div class="client-sub">Part of <strong>Bajaj Finance</strong></div>
+            </div>
+          </div>
+          <p class="client-desc" data-i18n="exp.hma.desc">
+            Flight Booking Portal for Bajaj Finance employees. Built a <strong>.NET/C# Console App</strong> to synchronize employee booking statuses with the HMA team. Developed full-stack features for the booking portal with React frontend and .NET backend, plus SharePoint (SPFx) integrations and SQL-based reporting on Azure DevOps pipelines.
+          </p>
+          <div class="tech-row">
+            <span class="tech-pill">.NET</span>
+            <span class="tech-pill">C#</span>
+            <span class="tech-pill">React</span>
+            <span class="tech-pill">SpFx</span>
+            <span class="tech-pill">SharePoint</span>
+            <span class="tech-pill">SQL</span>
+            <span class="tech-pill">Azure DevOps</span>
+            <span class="tech-pill">Python</span>
+          </div>
+        </div>
+
+        <!-- Carnival Corporation -->
+        <div class="client-card fade-up">
+          <div class="client-card-header">
+            <img class="client-logo"
+              src="https://raw.githubusercontent.com/dhiraj7kr/digitalDhiraj/main/CompanyLogo/carnival_corporation_logo.jpg"
+              onerror="this.src='https://via.placeholder.com/36?text=CC'"
+              alt="Carnival Corporation">
+            <div>
+              <div class="client-name">Carnival Corporation &amp; plc</div>
+              <div class="client-sub">Global Cruise Leader · Parent of HAL</div>
+            </div>
+          </div>
+          <p class="client-desc" data-i18n="exp.carnival.desc">
+            Worked on AI-powered digital transformation for the world's largest cruise company. Designed automation workflows in <strong>Power Automate</strong>, built Copilot Studio bots, integrated <strong>Azure AI</strong> services, and delivered Python-based data pipelines. Also managed Excel/SharePoint data infrastructure for operational efficiency.
+          </p>
+          <div class="tech-row">
+            <span class="tech-pill">Copilot Studio</span>
+            <span class="tech-pill">Power Automate</span>
+            <span class="tech-pill">Azure</span>
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">SharePoint</span>
+            <span class="tech-pill">Excel</span>
+            <span class="tech-pill">AI</span>
+          </div>
+        </div>
+
+        <!-- HAL -->
+        <div class="client-card fade-up">
+          <div class="client-card-header">
+            <img class="client-logo"
+              src="https://raw.githubusercontent.com/dhiraj7kr/digitalDhiraj/main/CompanyLogo/holland-america-line-vector-logo.png"
+              onerror="this.src='https://via.placeholder.com/36?text=HAL'"
+              alt="Holland America Line">
+            <div>
+              <div class="client-name">Holland America Line</div>
+              <div class="client-sub">Premium Cruise Line · 150+ Years</div>
+            </div>
+          </div>
+          <p class="client-desc" data-i18n="exp.hal.desc">
+            Spearheaded development of <strong>ANNA</strong>, an AI-powered travel assistant chatbot. Engineered a high-performance live-agent connector in <strong>.NET/C#</strong> enabling seamless real-time handoffs between AI bots and human support agents. Built frontend interfaces with React and Node.js, integrated Copilot Studio and Power Automate flows, and deployed on <strong>Azure</strong>.
+          </p>
+          <div class="tech-row">
+            <span class="tech-pill">.NET</span>
+            <span class="tech-pill">C#</span>
+            <span class="tech-pill">Node.js</span>
+            <span class="tech-pill">React</span>
+            <span class="tech-pill">Copilot Studio</span>
+            <span class="tech-pill">Power Automate</span>
+            <span class="tech-pill">Azure</span>
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">JavaScript</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bharat Intern -->
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-company-row">
+        <div>
+          <div class="tl-company">Bharat Intern</div>
+          <div class="tl-role" data-i18n="exp.bharat.role">Web Developer Intern</div>
+        </div>
+      </div>
+      <div class="tl-date"><i class="fas fa-calendar-alt" style="color:var(--accent)"></i>&nbsp; Oct 2023 – Nov 2023</div>
+      <p class="tl-desc" data-i18n="exp.bharat.desc">
+        Architected a full-stack <strong>Cruise Management System</strong> using the MERN Stack (MongoDB, Express.js, React, Node.js). Implemented end-to-end features including dynamic trip listings, secure booking workflows, and admin dashboards optimized for responsive performance.
+      </p>
+      <div class="tech-row">
+        <span class="tech-pill">MongoDB</span>
+        <span class="tech-pill">Express.js</span>
+        <span class="tech-pill">React</span>
+        <span class="tech-pill">Node.js</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ====== PROJECTS ====== -->
+<div class="section-full" id="projects">
+  <div class="section">
+    <div class="s-eyebrow" data-i18n="proj.eyebrow">Selected Work</div>
+    <h2 class="s-title" data-i18n="proj.title">Projects.</h2>
+    <p class="s-subtitle" data-i18n="proj.subtitle">Research, AI Systems, Mobile Engineering &amp; Full-Stack Applications.</p>
+
+    <div class="projects-grid">
+
+      <div class="proj-card fade-up">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?auto=format&fit=crop&w=800&q=80" alt="Nightingale Song">
+        </div>
+        <div class="proj-body">
+          <div class="proj-title" data-i18n="proj.bird.title">Geometry of a Nightingale Song</div>
+          <p class="proj-desc" data-i18n="proj.bird.desc">Research analysis of nightingale vocalizations using geometric and topological data analysis. Transforms audio into point clouds and manifolds, visualizing structure, motifs, and variability using dimensionality reduction techniques.</p>
+          <div class="tech-row" style="margin-bottom:18px">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">TDA</span>
+            <span class="tech-pill">Librosa</span>
+            <span class="tech-pill">Research</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/dhiraj7kr/Geometry-of-a-Nightingale-Song" target="_blank" class="proj-link">
+              <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card fade-up">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80" alt="Duper AIO">
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">Duper AIO</div>
+          <p class="proj-desc" data-i18n="proj.duper.desc">A robust personal management ecosystem for productivity, finance, and security. Features gesture-driven UI, secure encrypted storage for private notes, and a modular architecture built for performance.</p>
+          <div class="tech-row" style="margin-bottom:18px">
+            <span class="tech-pill">React Native</span>
+            <span class="tech-pill">Expo</span>
+            <span class="tech-pill">Node.js</span>
+            <span class="tech-pill">MongoDB</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/dhiraj7kr/DuperAIO" target="_blank" class="proj-link">
+              <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card fade-up">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=800&q=80" alt="Reddit Search">
+        </div>
+        <div class="proj-body">
+          <div class="proj-title" data-i18n="proj.reddit.title">Reddit Search Application</div>
+          <p class="proj-desc" data-i18n="proj.reddit.desc">A powerful multi-modal discovery tool for the Reddit ecosystem. Provides a streamlined, dark-themed interface categorizing results into text, high-resolution images, and curated video feeds using the Reddit API.</p>
+          <div class="tech-row" style="margin-bottom:18px">
+            <span class="tech-pill">React</span>
+            <span class="tech-pill">REST API</span>
+            <span class="tech-pill">CSS Modules</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/dhiraj7kr/Reddit-SearchBar" target="_blank" class="proj-link">
+              <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card fade-up">
+        <div class="proj-img">
+          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=800&q=80" alt="AI Memory">
+        </div>
+        <div class="proj-body">
+          <div class="proj-title">M2: AI Memory System</div>
+          <p class="proj-desc" data-i18n="proj.m2.desc">Centralized knowledge system powered by embeddings and FAISS. Enables semantic search across tasks, meetings, and PDFs. Includes AI-driven summarization, task generation, and multi-user support via Streamlit.</p>
+          <div class="tech-row" style="margin-bottom:18px">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">LangChain</span>
+            <span class="tech-pill">FAISS</span>
+            <span class="tech-pill">Streamlit</span>
+          </div>
+          <div class="proj-footer">
+            <a href="https://github.com/dhiraj7kr/My-Memory-M2" target="_blank" class="proj-link">
+              <i class="fab fa-github"></i> View on GitHub <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ====== CONTACT ====== -->
+<div class="section" id="contact">
+  <div class="s-eyebrow" data-i18n="contact.eyebrow">Let's Talk</div>
+  <h2 class="s-title" data-i18n="contact.title">Get In Touch.</h2>
+
+  <div class="contact-wrap">
+    <div class="contact-info fade-up">
+      <h3 data-i18n="contact.heading">Open to opportunities</h3>
+      <p data-i18n="contact.desc">I am always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Whether you have a question or just want to say hi — my inbox is always open.</p>
+      <div class="contact-items">
+        <div class="ci">
+          <div class="ci-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="ci-text">
+            <strong data-i18n="contact.loc">Location</strong>
+            Hyderabad, Telangana, India
+          </div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon"><i class="fas fa-envelope"></i></div>
+          <div class="ci-text">
+            <strong>Email</strong>
+            <a href="mailto:dhirajkr.tech@gmail.com">dhirajkr.tech@gmail.com</a>
+          </div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon"><i class="fas fa-phone-alt"></i></div>
+          <div class="ci-text">
+            <strong data-i18n="contact.phone">Phone</strong>
+            <a href="tel:+919472826071">+91 9472 8260 71</a>
+          </div>
+        </div>
+        <div class="ci">
+          <div class="ci-icon"><i class="fas fa-briefcase"></i></div>
+          <div class="ci-text">
+            <strong data-i18n="contact.company">Company</strong>
+            <a href="https://acuvate.com" target="_blank">ACUVATE Software Pvt. Ltd.</a>
+          </div>
+        </div>
+      </div>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/dhiraj7kr/" target="_blank" class="social-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/dhiraj7kr" target="_blank" class="social-btn" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://x.com/Dhiraj7kr" target="_blank" class="social-btn" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://instagram.com/dhiraj7kr" target="_blank" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+
+    <div class="contact-form fade-up">
+      <form id="contactForm" action="https://formspree.io/f/xnjjveza" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-i18n="form.name">Your Name</label>
+            <input type="text" name="name" class="form-input" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-i18n="form.email">Your Email</label>
+            <input type="email" name="email" class="form-input" placeholder="john@example.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="form.subject">Subject</label>
+          <input type="text" name="subject" class="form-input" placeholder="Project Inquiry" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="form.message">Message</label>
+          <textarea name="message" class="form-textarea" placeholder="Tell me about your project..." required></textarea>
+        </div>
+        <p id="formStatus" class="form-status"></p>
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <i class="fas fa-paper-plane"></i> <span data-i18n="form.send">Send Message</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">DK.</div>
+    <p class="footer-text">© 2026 Dhiraj Kumar. <span data-i18n="footer.rights">All rights reserved.</span></p>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/dhiraj7kr/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/dhiraj7kr" target="_blank">GitHub</a>
+      <a href="https://x.com/Dhiraj7kr" target="_blank">X</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+/* ====== i18n ====== */
+const translations = {
+  en: {
+    "nav.about":"About","nav.experience":"Experience","nav.projects":"Projects","nav.contact":"Contact",
+    "hero.eyebrow":"Based in Hyderabad, India",
+    "hero.desc":"Crafting enterprise-grade software solutions with .NET, React, Azure and AI. Building intelligent systems that scale across industries and continents.",
+    "hero.btn.work":"View My Work","hero.btn.contact":"Get In Touch","hero.btn.resume":"Resume",
+    "hero.stat.exp":"Years Experience","hero.stat.clients":"Enterprise Clients","hero.stat.tech":"Technologies","hero.stat.projects":"Open Source Projects",
+    "about.eyebrow":"Who I Am","about.title":"About Me.",
+    "about.p1":"I am Dhiraj Kumar, a Software Engineer based in Hyderabad, India. I hold a B.Tech in Computer Engineering from Jain University, Bangalore (2024), where I built a strong foundation in algorithms, system design, and software architecture.",
+    "about.p2":"Currently at ACUVATE Software Pvt. Ltd., I drive AI-powered enterprise solutions for global clients including Carnival Corporation, Holland America Line, and HMA (Bajaj Finance). I work across the full stack — from robust backends in .NET & C# to intuitive frontends using React & SharePoint.",
+    "about.p3":"Beyond code, I have a deep passion for AI & Copilot Studio, Azure cloud architecture, Python-based data processing, and computer vision. I believe in writing clean, maintainable code that genuinely solves real-world problems.",
+    "skills.languages":"Languages","skills.backend":"Backend & Cloud","skills.frontend":"Frontend & AI","skills.tools":"Tools & DevOps",
+    "exp.eyebrow":"Career Path","exp.title":"Experience.","exp.subtitle":"Professional journey — enterprise software, AI systems, and full-stack development across global clients.",
+    "exp.acuvate.role":"Software Engineer",
+    "exp.acuvate.desc":"Delivering enterprise-grade full-stack solutions for global clients in the travel, finance, and cruise industries. Specialized in AI integration, Microsoft Copilot Studio, Power Automate, SharePoint (SPFx), .NET/C#, React, Azure, SQL and Python. All client work listed below is delivered through ACUVATE Software.",
+    "exp.hma.desc":"Flight Booking Portal for Bajaj Finance employees. Built a .NET/C# Console App to synchronize employee booking statuses with the HMA team. Developed full-stack features for the booking portal with React frontend and .NET backend, plus SharePoint (SPFx) integrations and SQL-based reporting on Azure DevOps pipelines.",
+    "exp.carnival.desc":"Worked on AI-powered digital transformation for the world's largest cruise company. Designed automation workflows in Power Automate, built Copilot Studio bots, integrated Azure AI services, and delivered Python-based data pipelines. Also managed Excel/SharePoint data infrastructure for operational efficiency.",
+    "exp.hal.desc":"Spearheaded development of ANNA, an AI-powered travel assistant chatbot. Engineered a high-performance live-agent connector in .NET/C# enabling seamless real-time handoffs between AI bots and human support agents. Built frontend interfaces with React and Node.js, integrated Copilot Studio and Power Automate flows, and deployed on Azure.",
+    "exp.bharat.role":"Web Developer Intern",
+    "exp.bharat.desc":"Architected a full-stack Cruise Management System using the MERN Stack. Implemented end-to-end features including dynamic trip listings, secure booking workflows, and admin dashboards optimized for responsive performance.",
+    "proj.eyebrow":"Selected Work","proj.title":"Projects.","proj.subtitle":"Research, AI Systems, Mobile Engineering & Full-Stack Applications.",
+    "proj.bird.title":"Geometry of a Nightingale Song",
+    "proj.bird.desc":"Research analysis of nightingale vocalizations using geometric and topological data analysis. Transforms audio into point clouds and manifolds, visualizing structure, motifs, and variability using dimensionality reduction techniques.",
+    "proj.duper.desc":"A robust personal management ecosystem for productivity, finance, and security. Features gesture-driven UI, secure encrypted storage for private notes, and a modular architecture built for performance.",
+    "proj.reddit.title":"Reddit Search Application",
+    "proj.reddit.desc":"A powerful multi-modal discovery tool for the Reddit ecosystem. Provides a streamlined, dark-themed interface categorizing results into text, high-resolution images, and curated video feeds using the Reddit API.",
+    "proj.m2.desc":"Centralized knowledge system powered by embeddings and FAISS. Enables semantic search across tasks, meetings, and PDFs. Includes AI-driven summarization, task generation, and multi-user support via Streamlit.",
+    "contact.eyebrow":"Let's Talk","contact.title":"Get In Touch.","contact.heading":"Open to opportunities",
+    "contact.desc":"I am always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Whether you have a question or just want to say hi — my inbox is always open.",
+    "contact.loc":"Location","contact.phone":"Phone","contact.company":"Company",
+    "form.name":"Your Name","form.email":"Your Email","form.subject":"Subject","form.message":"Message","form.send":"Send Message",
+    "footer.rights":"All rights reserved."
+  },
+  de: {
+    "nav.about":"Über mich","nav.experience":"Erfahrung","nav.projects":"Projekte","nav.contact":"Kontakt",
+    "hero.eyebrow":"Ansässig in Hyderabad, Indien",
+    "hero.desc":"Entwicklung von Enterprise-Softwarelösungen mit .NET, React, Azure und KI. Aufbau intelligenter Systeme, die branchenübergreifend skalieren.",
+    "hero.btn.work":"Meine Arbeit","hero.btn.contact":"Kontakt aufnehmen","hero.btn.resume":"Lebenslauf",
+    "hero.stat.exp":"Jahre Erfahrung","hero.stat.clients":"Unternehmenskunden","hero.stat.tech":"Technologien","hero.stat.projects":"Open-Source-Projekte",
+    "about.eyebrow":"Wer ich bin","about.title":"Über mich.",
+    "about.p1":"Ich bin Dhiraj Kumar, ein Softwareentwickler aus Hyderabad, Indien. Ich habe einen B.Tech in Computertechnik von der Jain University, Bangalore (2024).",
+    "about.p2":"Derzeit bei ACUVATE Software Pvt. Ltd. entwickle ich KI-gestützte Unternehmenslösungen für globale Kunden, darunter Carnival Corporation, Holland America Line und HMA (Bajaj Finance).",
+    "about.p3":"Über die Programmierung hinaus habe ich eine tiefe Leidenschaft für KI & Copilot Studio, Azure-Cloud-Architektur, Python-basierte Datenverarbeitung und Computer Vision.",
+    "skills.languages":"Sprachen","skills.backend":"Backend & Cloud","skills.frontend":"Frontend & KI","skills.tools":"Tools & DevOps",
+    "exp.eyebrow":"Karriereweg","exp.title":"Erfahrung.","exp.subtitle":"Professioneller Werdegang — Enterprise-Software, KI-Systeme und Full-Stack-Entwicklung.",
+    "exp.acuvate.role":"Softwareentwickler",
+    "exp.acuvate.desc":"Lieferung von erstklassigen Full-Stack-Lösungen für globale Kunden in der Reise-, Finanz- und Kreuzfahrtbranche.",
+    "exp.hma.desc":"Flugbuchungsportal für Bajaj Finance Mitarbeiter. Entwicklung einer .NET/C# Konsolenanwendung zur Synchronisierung von Buchungsstatus mit dem HMA-Team.",
+    "exp.carnival.desc":"KI-gestützte digitale Transformation für das weltgrößte Kreuzfahrtunternehmen. Automatisierungsworkflows in Power Automate, Copilot Studio Bots und Python-Datenpipelines.",
+    "exp.hal.desc":"Entwicklung von ANNA, einem KI-gestützten Reiseassistenten-Chatbot. Echtzeit-Übergaben zwischen KI-Bots und menschlichen Support-Agenten mit .NET/C#.",
+    "exp.bharat.role":"Webentwickler-Praktikant",
+    "exp.bharat.desc":"Entwicklung eines Full-Stack-Kreuzfahrtmanagementsystems mit dem MERN-Stack inklusive dynamischer Buchungsworkflows und Admin-Dashboards.",
+    "proj.eyebrow":"Ausgewählte Arbeiten","proj.title":"Projekte.","proj.subtitle":"Forschung, KI-Systeme, Mobile Engineering & Full-Stack-Anwendungen.",
+    "proj.bird.title":"Geometrie eines Nachtigallen-Gesangs",
+    "proj.bird.desc":"Forschungsanalyse von Nachtigallen-Vokalklängen mittels geometrischer und topologischer Datenanalyse.",
+    "proj.duper.desc":"Robustes persönliches Management-Ökosystem für Produktivität, Finanzen und Sicherheit.",
+    "proj.reddit.title":"Reddit-Suchanwendung",
+    "proj.reddit.desc":"Leistungsstarkes multimodales Discovery-Tool für das Reddit-Ökosystem.",
+    "proj.m2.desc":"Zentralisiertes Wissenssystem mit Embeddings und FAISS für semantische Suche.",
+    "contact.eyebrow":"Kontakt","contact.title":"Schreib mir.","contact.heading":"Offen für Möglichkeiten",
+    "contact.desc":"Ich bin immer offen für neue Projekte, kreative Ideen oder Möglichkeiten, Teil Ihrer Vision zu sein.",
+    "contact.loc":"Standort","contact.phone":"Telefon","contact.company":"Unternehmen",
+    "form.name":"Ihr Name","form.email":"Ihre E-Mail","form.subject":"Betreff","form.message":"Nachricht","form.send":"Nachricht senden",
+    "footer.rights":"Alle Rechte vorbehalten."
+  },
+  fr: {
+    "nav.about":"À propos","nav.experience":"Expérience","nav.projects":"Projets","nav.contact":"Contact",
+    "hero.eyebrow":"Basé à Hyderabad, Inde",
+    "hero.desc":"Création de solutions logicielles d'entreprise avec .NET, React, Azure et l'IA. Construction de systèmes intelligents évolutifs.",
+    "hero.btn.work":"Voir mon travail","hero.btn.contact":"Me contacter","hero.btn.resume":"CV",
+    "hero.stat.exp":"Ans d'expérience","hero.stat.clients":"Clients entreprise","hero.stat.tech":"Technologies","hero.stat.projects":"Projets open source",
+    "about.eyebrow":"Qui je suis","about.title":"À propos de moi.",
+    "about.p1":"Je suis Dhiraj Kumar, ingénieur logiciel basé à Hyderabad, en Inde. Titulaire d'un B.Tech en génie informatique de l'Université Jain, Bangalore (2024).",
+    "about.p2":"Actuellement chez ACUVATE Software Pvt. Ltd., je développe des solutions d'entreprise alimentées par l'IA pour des clients mondiaux dont Carnival Corporation, Holland America Line et HMA (Bajaj Finance).",
+    "about.p3":"Au-delà du code, j'ai une passion profonde pour l'IA & Copilot Studio, l'architecture cloud Azure, le traitement de données Python et la vision par ordinateur.",
+    "skills.languages":"Langages","skills.backend":"Backend & Cloud","skills.frontend":"Frontend & IA","skills.tools":"Outils & DevOps",
+    "exp.eyebrow":"Parcours","exp.title":"Expérience.","exp.subtitle":"Parcours professionnel — logiciels d'entreprise, systèmes IA et développement full-stack pour clients mondiaux.",
+    "exp.acuvate.role":"Ingénieur Logiciel",
+    "exp.acuvate.desc":"Livraison de solutions full-stack de qualité entreprise pour des clients mondiaux dans les secteurs du voyage, de la finance et des croisières.",
+    "exp.hma.desc":"Portail de réservation de vols pour les employés de Bajaj Finance. Développement d'une application console .NET/C# pour synchroniser les statuts de réservation avec l'équipe HMA.",
+    "exp.carnival.desc":"Transformation numérique alimentée par l'IA pour le plus grand groupe de croisières au monde. Workflows Power Automate, bots Copilot Studio et pipelines de données Python.",
+    "exp.hal.desc":"Développement d'ANNA, un chatbot assistant voyage IA. Connecteur d'agent en direct en .NET/C# pour des transferts transparents entre bots IA et agents humains.",
+    "exp.bharat.role":"Stagiaire Développeur Web",
+    "exp.bharat.desc":"Architecture d'un système de gestion de croisières full-stack avec la pile MERN incluant réservations dynamiques et tableaux de bord administrateur.",
+    "proj.eyebrow":"Travaux sélectionnés","proj.title":"Projets.","proj.subtitle":"Recherche, systèmes IA, ingénierie mobile & applications full-stack.",
+    "proj.bird.title":"Géométrie d'un chant de rossignol",
+    "proj.bird.desc":"Analyse de recherche des vocalisations de rossignols en utilisant l'analyse de données géométrique et topologique.",
+    "proj.duper.desc":"Écosystème de gestion personnelle robuste pour la productivité, les finances et la sécurité.",
+    "proj.reddit.title":"Application de recherche Reddit",
+    "proj.reddit.desc":"Outil de découverte multimodal pour l'écosystème Reddit.",
+    "proj.m2.desc":"Système de connaissances centralisé propulsé par des embeddings et FAISS pour la recherche sémantique.",
+    "contact.eyebrow":"Parlons-nous","contact.title":"Contactez-moi.","contact.heading":"Ouvert aux opportunités",
+    "contact.desc":"Je suis toujours disponible pour discuter de nouveaux projets, d'idées créatives ou d'opportunités.",
+    "contact.loc":"Localisation","contact.phone":"Téléphone","contact.company":"Entreprise",
+    "form.name":"Votre nom","form.email":"Votre email","form.subject":"Sujet","form.message":"Message","form.send":"Envoyer le message",
+    "footer.rights":"Tous droits réservés."
+  },
+  es: {
+    "nav.about":"Sobre mí","nav.experience":"Experiencia","nav.projects":"Proyectos","nav.contact":"Contacto",
+    "hero.eyebrow":"Basado en Hyderabad, India",
+    "hero.desc":"Creando soluciones de software empresarial con .NET, React, Azure e IA. Construyendo sistemas inteligentes que escalan entre industrias y continentes.",
+    "hero.btn.work":"Ver mi trabajo","hero.btn.contact":"Contáctame","hero.btn.resume":"Currículum",
+    "hero.stat.exp":"Años de experiencia","hero.stat.clients":"Clientes empresariales","hero.stat.tech":"Tecnologías","hero.stat.projects":"Proyectos open source",
+    "about.eyebrow":"Quién soy","about.title":"Sobre mí.",
+    "about.p1":"Soy Dhiraj Kumar, ingeniero de software basado en Hyderabad, India. Tengo un B.Tech en Ingeniería Informática de la Universidad Jain, Bangalore (2024).",
+    "about.p2":"Actualmente en ACUVATE Software Pvt. Ltd., impulso soluciones empresariales potenciadas por IA para clientes globales como Carnival Corporation, Holland America Line y HMA (Bajaj Finance).",
+    "about.p3":"Más allá del código, tengo una profunda pasión por IA & Copilot Studio, arquitectura cloud de Azure, procesamiento de datos con Python y visión por computadora.",
+    "skills.languages":"Lenguajes","skills.backend":"Backend & Cloud","skills.frontend":"Frontend & IA","skills.tools":"Herramientas & DevOps",
+    "exp.eyebrow":"Trayectoria","exp.title":"Experiencia.","exp.subtitle":"Trayectoria profesional — software empresarial, sistemas IA y desarrollo full-stack para clientes globales.",
+    "exp.acuvate.role":"Ingeniero de Software",
+    "exp.acuvate.desc":"Entrega de soluciones full-stack de nivel empresarial para clientes globales en viajes, finanzas e industria de cruceros.",
+    "exp.hma.desc":"Portal de reservas de vuelos para empleados de Bajaj Finance. Aplicación consola .NET/C# para sincronizar estados de reservas con el equipo HMA.",
+    "exp.carnival.desc":"Transformación digital con IA para la empresa de cruceros más grande del mundo. Flujos Power Automate, bots Copilot Studio y pipelines Python.",
+    "exp.hal.desc":"Desarrollo de ANNA, chatbot asistente de viajes con IA. Conector de agente en vivo en .NET/C# para transferencias en tiempo real entre bots IA y agentes humanos.",
+    "exp.bharat.role":"Pasante Desarrollador Web",
+    "exp.bharat.desc":"Arquitectura de sistema de gestión de cruceros full-stack con MERN Stack incluyendo reservas dinámicas y paneles de administración.",
+    "proj.eyebrow":"Trabajo seleccionado","proj.title":"Proyectos.","proj.subtitle":"Investigación, sistemas IA, ingeniería móvil y aplicaciones full-stack.",
+    "proj.bird.title":"Geometría del canto de un ruiseñor",
+    "proj.bird.desc":"Análisis de investigación de vocalizaciones de ruiseñores usando análisis de datos geométrico y topológico.",
+    "proj.duper.desc":"Ecosistema robusto de gestión personal para productividad, finanzas y seguridad.",
+    "proj.reddit.title":"Aplicación de búsqueda de Reddit",
+    "proj.reddit.desc":"Potente herramienta de descubrimiento multimodal para el ecosistema Reddit.",
+    "proj.m2.desc":"Sistema de conocimiento centralizado con embeddings y FAISS para búsqueda semántica.",
+    "contact.eyebrow":"Hablemos","contact.title":"Contacto.","contact.heading":"Abierto a oportunidades",
+    "contact.desc":"Siempre estoy abierto a discutir nuevos proyectos, ideas creativas u oportunidades para ser parte de tu visión.",
+    "contact.loc":"Ubicación","contact.phone":"Teléfono","contact.company":"Empresa",
+    "form.name":"Tu nombre","form.email":"Tu email","form.subject":"Asunto","form.message":"Mensaje","form.send":"Enviar mensaje",
+    "footer.rights":"Todos los derechos reservados."
+  }
+};
+const langFlags = {en:'🇬🇧',de:'🇩🇪',fr:'🇫🇷',es:'🇪🇸'};
+const langNames = {en:'EN',de:'DE',fr:'FR',es:'ES'};
+
+let currentLang = 'en';
+function applyLang(lang){
+  currentLang = lang;
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(t[key]) el.textContent = t[key];
+  });
+  document.getElementById('currentFlag').textContent = langFlags[lang];
+  document.getElementById('currentLang').textContent = langNames[lang];
+  document.querySelectorAll('.lang-opt').forEach(o=>{
+    o.classList.toggle('active', o.dataset.lang === lang);
+  });
+  document.documentElement.lang = lang;
+}
+
+// Lang dropdown
+const langDropdown = document.getElementById('langDropdown');
+document.getElementById('langBtn').addEventListener('click', e=>{
+  e.stopPropagation();
+  langDropdown.classList.toggle('open');
+});
+document.querySelectorAll('.lang-opt').forEach(opt=>{
+  opt.addEventListener('click',()=>{
+    applyLang(opt.dataset.lang);
+    langDropdown.classList.remove('open');
+  });
+});
+document.addEventListener('click', ()=> langDropdown.classList.remove('open'));
+
+/* ====== Theme ====== */
+const themeBtn = document.getElementById('themeBtn');
+const themeIcon = document.getElementById('themeIcon');
+let isDark = true;
+themeBtn.addEventListener('click',()=>{
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+});
+
+/* ====== Mobile menu ====== */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click',()=>{
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+function closeMenu(){
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+
+/* ====== Cursor ====== */
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove',e=>{
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a,button,.proj-card,.client-card,.skill-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cursor.classList.add('grow'));
+  el.addEventListener('mouseleave',()=>cursor.classList.remove('grow'));
+});
+
+/* ====== Intersection observer ====== */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+    }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.fade-up,.tl-item').forEach(el=>observer.observe(el));
+
+/* ====== Active nav ====== */
+const sections = document.querySelectorAll('section,[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur = '';
+  document.querySelectorAll('#home,#about,#experience,#projects,#contact').forEach(s=>{
+    if(s.getBoundingClientRect().top < 80) cur = s.id;
+  });
+  navAs.forEach(a=>{
+    a.classList.toggle('active-nav', a.getAttribute('href') === '#'+cur);
+  });
+},{ passive: true });
+
+/* ====== Experience duration ====== */
+(function(){
+  const start = new Date('2024-08-01');
+  const now = new Date();
+  let y = now.getFullYear() - start.getFullYear();
+  let m = now.getMonth() - start.getMonth();
+  if(m < 0){y--;m+=12}
+  m++;
+  if(m>=12){y++;m-=12}
+  let txt = '(';
+  if(y>0) txt += y + (y===1?' yr ':' yrs ');
+  if(m>0) txt += m + (m===1?' mo':' mos');
+  txt += ')';
+  const el = document.getElementById('acuvateDuration');
+  if(el) el.textContent = txt;
+})();
+
+/* ====== Exp years hero ====== */
+(function(){
+  const start = new Date('2024-08-01');
+  const now = new Date();
+  const years = ((now - start)/(1000*60*60*24*365)).toFixed(1);
+  const el = document.getElementById('expYears');
+  if(el) el.textContent = years + '+';
+})();
+
+/* ====== Contact form ====== */
+const form = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+const submitBtn = document.getElementById('submitBtn');
+form.addEventListener('submit', async e=>{
+  e.preventDefault();
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Sending...";
+  formStatus.textContent = '';
+  try{
+    const res = await fetch(form.action,{
+      method:'POST',body:new FormData(form),
+      headers:{Accept:'application/json'}
+    });
+    if(res.ok){
+      formStatus.textContent = '✓ Message sent successfully!';
+      formStatus.style.color = '#4caf50';
+      form.reset();
+    } else {
+      formStatus.textContent = '✗ Something went wrong. Please try again.';
+      formStatus.style.color = '#e53935';
+    }
+  } catch {
+    formStatus.textContent = '✗ Network error. Please try again.';
+    formStatus.style.color = '#e53935';
+  }
+  submitBtn.disabled = false;
+  submitBtn.innerHTML = "<i class='fas fa-paper-plane'></i> <span>Send Message</span>";
+});
+
+/* ====== Smooth hero scroll indicator ====== */
+window.addEventListener('scroll',()=>{
+  const hs = document.querySelector('.hero-scroll');
+  if(hs) hs.style.opacity = Math.max(0, 1 - window.scrollY/300);
+},{passive:true});
+</script>
+</body>
+</html>

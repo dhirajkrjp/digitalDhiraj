@@ -1,0 +1,82 @@
+/* --- experience.css --- */
+
+/* TIMELINE CONTAINER */
+.timeline-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 20px;
+}
+
+/* TIMELINE ITEM */
+.timeline-item {
+    padding: 40px 0 40px 40px;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    transition: border-color 0.3s ease;
+}
+
+.timeline-item:hover {
+    border-left-color: var(--accent);
+}
+
+/* DOT INDICATOR */
+.timeline-dot {
+    width: 14px;
+    height: 14px;
+    background: var(--bg-card);
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    left: -8px;
+    top: 48px;
+    box-shadow: 0 0 0 6px var(--bg-body);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.timeline-item:hover .timeline-dot {
+    background-color: var(--accent);
+    transform: scale(1.2);
+}
+
+/* CONTENT TYPOGRAPHY */
+.exp-role {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.exp-company {
+    font-size: 1.1rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.exp-date {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+    display: inline-block;
+    background: rgba(255,255,255,0.05);
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+/* NEW: LIST STYLING FOR DETAILS */
+.exp-detail-list {
+    list-style-type: disc !important; /* Force bullets back */
+    padding-left: 18px;
+    margin-top: 10px;
+}
+
+.exp-detail-list li {
+    font-size: 1.05rem;
+    color: #a1a1a6;
+    line-height: 1.7;
+    margin-bottom: 10px;
+    max-width: 95%;
+}

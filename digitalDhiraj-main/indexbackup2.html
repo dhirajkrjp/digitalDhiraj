@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhiraj Kumar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Georgia:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --text: #1a1a1a;
+    --muted: #555;
+    --link: #0645ad;
+    --link-hover: #0b0080;
+    --border: #e0e0e0;
+    --bg: #ffffff;
+    --tag-bg: #f0f0f0;
+    --accent: #c00;
+    --timeline-line: #ccc;
+    --year-color: #888;
+    --section-pad: 56px;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--link); text-decoration: underline; }
+  a:hover { color: var(--link-hover); }
+
+  /* ── Layout ── */
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 56px 0 40px;
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+  }
+
+  .header-text h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+
+  .header-text .tagline {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: var(--muted);
+    font-size: 0.97rem;
+    margin-bottom: 14px;
+  }
+
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .social-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3px 10px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .social-links a:hover {
+    color: var(--text);
+    border-color: #999;
+  }
+
+  /* ── Sections ── */
+  section {
+    padding: var(--section-pad) 0;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-child { border-bottom: none; }
+
+  .section-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tl-entry {
+    display: grid;
+    grid-template-columns: 90px 1px 1fr;
+    gap: 0 24px;
+    position: relative;
+    padding-bottom: 36px;
+  }
+  .tl-entry:last-child { padding-bottom: 0; }
+
+  .tl-years {
+    font-size: 0.82rem;
+    color: var(--year-color);
+    padding-top: 2px;
+    text-align: right;
+    line-height: 1.4;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tl-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+
+  .tl-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--text);
+    flex-shrink: 0;
+    margin-top: 5px;
+    z-index: 1;
+  }
+
+  .tl-connector {
+    width: 1px;
+    flex: 1;
+    background: var(--timeline-line);
+    margin-top: 4px;
+  }
+
+  .tl-entry:last-child .tl-connector { display: none; }
+
+  .tl-content {
+    padding-top: 0;
+  }
+
+  .tl-org {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .org-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    object-fit: contain;
+    border: 1px solid var(--border);
+    padding: 2px;
+    background: #fafafa;
+    flex-shrink: 0;
+  }
+
+  .tl-content p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 10px;
+  }
+
+  .tl-content p strong { color: var(--text); }
+
+  .tl-role {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+
+  /* ── Tech tags ── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 8px;
+  }
+
+  .tag {
+    background: var(--tag-bg);
+    color: #444;
+    border-radius: 3px;
+    padding: 2px 7px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  /* ── Client sub-entries ── */
+  .client-list {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .client-entry {
+    padding-left: 16px;
+    border-left: 2px solid var(--border);
+  }
+
+  .client-entry h4 {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+
+  .client-entry p {
+    font-size: 0.87rem;
+    color: var(--muted);
+    margin-bottom: 6px !important;
+  }
+
+  /* ── Talks grid ── */
+  .talks-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .talk-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .talk-card:hover { border-color: #aaa; }
+
+  .talk-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #bbb;
+    font-size: 0.75rem;
+    font-style: italic;
+    overflow: hidden;
+  }
+
+  .talk-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .talk-label {
+    padding: 8px 10px;
+    font-size: 0.81rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── Teaching ── */
+  .teaching-videos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+
+  .vid-card {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .vid-card:hover { border-color: #aaa; }
+
+  .vid-thumb {
+    aspect-ratio: 16/9;
+    background: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-size: 0.65rem;
+    text-align: center;
+    padding: 4px;
+    overflow: hidden;
+  }
+
+  .vid-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85);
+  }
+
+  .vid-label {
+    padding: 6px 8px;
+    font-size: 0.73rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    line-height: 1.4;
+  }
+
+  .vid-meta {
+    font-size: 0.68rem;
+    color: #aaa;
+    margin-top: 2px;
+  }
+
+  /* ── Writing list ── */
+  .writing-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .writing-list li {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    font-size: 0.92rem;
+  }
+
+  .writing-date {
+    color: var(--year-color);
+    font-size: 0.82rem;
+    white-space: nowrap;
+    min-width: 72px;
+  }
+
+  /* ── Projects ── */
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .project-entry {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .project-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    object-fit: cover;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .project-entry h4 {
+    font-size: 0.93rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .project-entry p {
+    font-size: 0.87rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  /* ── Bio box ── */
+  .bio-box {
+    background: #fafafa;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 24px;
+    line-height: 1.75;
+  }
+
+  /* ── Contact ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .contact-item span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--year-color);
+    font-weight: 600;
+  }
+
+  .contact-item a, .contact-item p {
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .contact-item a { text-decoration: underline; color: var(--link); }
+
+  /* ── Skills inline ── */
+  .skills-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .skill-row-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.88rem;
+  }
+
+  .skill-label {
+    min-width: 100px;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--year-color);
+    padding-top: 2px;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 32px 0 48px;
+    font-size: 0.82rem;
+    color: var(--year-color);
+    text-align: center;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 640px) {
+    header { flex-direction: column; gap: 20px; }
+    .avatar { width: 90px; height: 90px; }
+    .talks-grid { grid-template-columns: 1fr; }
+    .teaching-videos { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; }
+    .tl-entry { grid-template-columns: 56px 1px 1fr; gap: 0 16px; }
+    .project-entry { grid-template-columns: 1fr; }
+    .project-icon { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HEADER ── -->
+  <header>
+    <img class="avatar"
+      src="https://raw.githubusercontent.com/dhiraj7kr/digitalDhiraj/refs/heads/main/Project/DKGE.jpeg"
+      alt="Dhiraj Kumar"
+      onerror="this.style.background='#eee';this.src=''">
+    <div class="header-text">
+      <h1>Dhiraj Kumar</h1>
+      <p class="tagline">I like to build intelligent systems that solve real-world problems 💡 ☁️ 🤖</p>
+      <div class="social-links">
+        <a href="https://x.com/Dhiraj7kr" target="_blank">𝕏 / Twitter</a>
+        <a href="https://github.com/dhiraj7kr" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/dhiraj7kr/" target="_blank">LinkedIn</a>
+        <a href="https://instagram.com/dhiraj7kr" target="_blank">Instagram</a>
+        <a href="mailto:dhirajkr.tech@gmail.com">Email</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── EXPERIENCE TIMELINE ── -->
+  <section>
+    <h2 class="section-title">experience</h2>
+
+    <div class="timeline">
+
+      <!-- ACUVATE -->
+      <div class="tl-entry">
+        <div class="tl-years">2024 –<br>present</div>
+        <div class="tl-line">
+          <div class="tl-dot"></div>
+          <div class="tl-connector"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-org">
+            <img class="org-logo"
+              src="https://acuvate.com/wp-content/uploads/2021/04/acuvate_Logo.png"
+              onerror="this.style.display='none'"
+              alt="Acuvate">
+            <span class="tl-role"><a href="https://acuvate.com" target="_blank">ACUVATE Software Pvt. Ltd.</a> — Software Engineer</span>
+          </div>
+          <p>
+            Delivering enterprise-grade full-stack solutions for global clients across travel, finance, and cruise industries. Specialized in <strong>AI integration, Microsoft Copilot Studio, Power Automate, SharePoint (SPFx), .NET/C#, React, Azure, SQL</strong> and Python.
+          </p>
+          <div class="client-list">
+            <div class="client-entry">
+              <h4>Holland America Line — ANNA AI Chatbot</h4>
+              <p>Spearheaded development of <strong>ANNA</strong>, an AI-powered travel assistant. Engineered a high-performance live-agent connector in <strong>.NET/C#</strong> enabling real-time handoffs between AI bots and human agents. Built frontend interfaces with React and Node.js, integrated Copilot Studio and Power Automate, deployed on Azure.</p>
+              <div class="tags">
+                <span class="tag">.NET</span><span class="tag">C#</span><span class="tag">React</span>
+                <span class="tag">Node.js</span><span class="tag">Copilot Studio</span>
+                <span class="tag">Power Automate</span><span class="tag">Azure</span><span class="tag">Python</span>
+              </div>
+            </div>
+            <div class="client-entry">
+              <h4>Carnival Corporation — AI Digital Transformation</h4>
+              <p>Designed automation workflows in <strong>Power Automate</strong>, built Copilot Studio bots, integrated <strong>Azure AI</strong> services, and delivered Python-based data pipelines for the world's largest cruise company.</p>
+              <div class="tags">
+                <span class="tag">Copilot Studio</span><span class="tag">Power Automate</span>
+                <span class="tag">Azure AI</span><span class="tag">Python</span><span class="tag">SharePoint</span>
+              </div>
+            </div>
+            <div class="client-entry">
+              <h4>HMA Travel / Bajaj Finance — Flight Booking Portal</h4>
+              <p>Built a <strong>.NET/C# Console App</strong> to sync employee booking statuses, developed full-stack portal features with React frontend and .NET backend, SharePoint (SPFx) integrations, and SQL-based reporting on Azure DevOps pipelines.</p>
+              <div class="tags">
+                <span class="tag">.NET</span><span class="tag">C#</span><span class="tag">React</span>
+                <span class="tag">SpFx</span><span class="tag">SQL</span><span class="tag">Azure DevOps</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bharat Intern -->
+      <div class="tl-entry">
+        <div class="tl-years">Oct–Nov<br>2023</div>
+        <div class="tl-line">
+          <div class="tl-dot"></div>
+          <div class="tl-connector"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-org">
+            <span class="tl-role">Bharat Intern — Web Developer Intern</span>
+          </div>
+          <p>Architected a full-stack <strong>Cruise Management System</strong> using the MERN Stack. Implemented dynamic trip listings, secure booking workflows, and admin dashboards optimized for responsive performance.</p>
+          <div class="tags">
+            <span class="tag">MongoDB</span><span class="tag">Express.js</span>
+            <span class="tag">React</span><span class="tag">Node.js</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="tl-entry">
+        <div class="tl-years">2020–<br>2024</div>
+        <div class="tl-line">
+          <div class="tl-dot"></div>
+          <div class="tl-connector"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-org">
+            <span class="tl-role">Jain University, Bangalore — B.Tech Computer Engineering</span>
+          </div>
+          <p>Built a strong foundation in algorithms, system design, and software architecture. Got deep into deep learning, computer vision, and cloud-native development. This is where the obsession with AI systems began.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- bio blurb -->
+    <div class="bio-box">
+      Dhiraj Kumar is a software engineer and AI systems builder based in Hyderabad, India. He is a Software Engineer at ACUVATE Software, where he drives AI-powered enterprise solutions for global clients including Carnival Corporation, Holland America Line, and HMA (Bajaj Finance). His work spans full-stack development, cloud architecture, and intelligent automation — with a particular focus on Microsoft Copilot Studio, Azure AI, and .NET/React systems.
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <section>
+    <h2 class="section-title">skills</h2>
+    <div class="skills-row">
+      <div class="skill-row-item">
+        <span class="skill-label">Languages</span>
+        <div class="tags">
+          <span class="tag">C# / .NET</span><span class="tag">Python</span><span class="tag">JavaScript</span>
+          <span class="tag">Java 17+</span><span class="tag">HTML / CSS</span>
+        </div>
+      </div>
+      <div class="skill-row-item">
+        <span class="skill-label">Backend & Cloud</span>
+        <div class="tags">
+          <span class="tag">Azure</span><span class="tag">REST APIs</span><span class="tag">SQL Server</span>
+          <span class="tag">Spring Boot</span><span class="tag">Node.js</span><span class="tag">MongoDB</span>
+        </div>
+      </div>
+      <div class="skill-row-item">
+        <span class="skill-label">Frontend & AI</span>
+        <div class="tags">
+          <span class="tag">React.js</span><span class="tag">SharePoint / SPFx</span>
+          <span class="tag">Copilot Studio</span><span class="tag">Power Automate</span><span class="tag">LangChain</span>
+        </div>
+      </div>
+      <div class="skill-row-item">
+        <span class="skill-label">Tools & DevOps</span>
+        <div class="tags">
+          <span class="tag">Azure DevOps</span><span class="tag">Git & GitHub</span>
+          <span class="tag">FAISS</span><span class="tag">OpenCV</span><span class="tag">Streamlit</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURED TALKS / DEMOS ── -->
+  <section>
+    <h2 class="section-title">featured projects & demos</h2>
+    <div class="talks-grid">
+      <div class="talk-card">
+        <div class="talk-thumb">
+          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=70" alt="ANNA chatbot">
+        </div>
+        <div class="talk-label">ANNA — AI Travel Assistant Chatbot · Holland America Line</div>
+      </div>
+      <div class="talk-card">
+        <div class="talk-thumb">
+          <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&q=70" alt="Duper AIO">
+        </div>
+        <div class="talk-label">Duper AIO — Personal Management App · React Native + Expo</div>
+      </div>
+      <div class="talk-card">
+        <div class="talk-thumb">
+          <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?auto=format&fit=crop&w=600&q=70" alt="Nightingale Song">
+        </div>
+        <div class="talk-label">Geometry of a Nightingale Song · Python · TDA Research</div>
+      </div>
+      <div class="talk-card">
+        <div class="talk-thumb">
+          <img src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?auto=format&fit=crop&w=600&q=70" alt="Reddit Search">
+        </div>
+        <div class="talk-label">Reddit Search Application · React · REST API</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OPEN SOURCE PROJECTS ── -->
+  <section>
+    <h2 class="section-title">pet projects</h2>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:20px;">See my up-to-date projects on <a href="https://github.com/dhiraj7kr" target="_blank">GitHub</a>.</p>
+
+    <div class="projects-list">
+
+      <div class="project-entry">
+        <div class="project-icon">🧠</div>
+        <div>
+          <h4><a href="https://github.com/dhiraj7kr/My-Memory-M2" target="_blank">M2: AI Memory System</a></h4>
+          <p>Centralized knowledge system powered by embeddings and FAISS. Enables semantic search across tasks, meetings, and PDFs. Includes AI-driven summarization, task generation, and multi-user support via Streamlit.</p>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">LangChain</span>
+            <span class="tag">FAISS</span><span class="tag">Streamlit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-entry">
+        <div class="project-icon">📱</div>
+        <div>
+          <h4><a href="https://github.com/dhiraj7kr/DuperAIO" target="_blank">Duper AIO</a></h4>
+          <p>A robust personal management ecosystem for productivity, finance, and security. Features gesture-driven UI, secure encrypted storage for private notes, and a modular architecture built for performance.</p>
+          <div class="tags">
+            <span class="tag">React Native</span><span class="tag">Expo</span>
+            <span class="tag">Node.js</span><span class="tag">MongoDB</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-entry">
+        <div class="project-icon">🐦</div>
+        <div>
+          <h4><a href="https://github.com/dhiraj7kr/Geometry-of-a-Nightingale-Song" target="_blank">Geometry of a Nightingale Song</a></h4>
+          <p>Research analysis of nightingale vocalizations using geometric and topological data analysis. Transforms audio into point clouds and manifolds, visualizing structure and variability using dimensionality reduction.</p>
+          <div class="tags">
+            <span class="tag">Python</span><span class="tag">TDA</span>
+            <span class="tag">Librosa</span><span class="tag">Research</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-entry">
+        <div class="project-icon">🔍</div>
+        <div>
+          <h4><a href="https://github.com/dhiraj7kr/Reddit-SearchBar" target="_blank">Reddit Search Application</a></h4>
+          <p>A multi-modal discovery tool for the Reddit ecosystem. Streamlined dark-themed interface categorizing results into text, high-resolution images, and curated video feeds using the Reddit API.</p>
+          <div class="tags">
+            <span class="tag">React</span><span class="tag">REST API</span><span class="tag">CSS Modules</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FEATURED WRITING ── -->
+  <section>
+    <h2 class="section-title">featured writing</h2>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:20px;">Notes on engineering, AI systems, and lessons from building production software.</p>
+    <ul class="writing-list">
+      <li>
+        <span class="writing-date">2024</span>
+        <a href="https://github.com/dhiraj7kr" target="_blank">Building ANNA: Lessons from deploying an AI chatbot in production</a>
+      </li>
+      <li>
+        <span class="writing-date">2024</span>
+        <a href="https://github.com/dhiraj7kr" target="_blank">Semantic Memory for LLM apps with FAISS and LangChain</a>
+      </li>
+      <li>
+        <span class="writing-date">2024</span>
+        <a href="https://github.com/dhiraj7kr" target="_blank">A practical guide to Microsoft Copilot Studio for enterprise automation</a>
+      </li>
+      <li>
+        <span class="writing-date">2023</span>
+        <a href="https://github.com/dhiraj7kr/Geometry-of-a-Nightingale-Song" target="_blank">Geometry of a Nightingale Song — topological data analysis of birdsong</a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section>
+    <h2 class="section-title">contact</h2>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:24px;">
+      I am always open to discussing new projects, creative ideas, or opportunities. My inbox is always open.
+    </p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span>Location</span>
+        <p>Hyderabad, Telangana, India</p>
+      </div>
+      <div class="contact-item">
+        <span>Email</span>
+        <a href="mailto:dhirajkr.tech@gmail.com">dhirajkr.tech@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span>Phone</span>
+        <a href="tel:+919472826071">+91 9472 826 071</a>
+      </div>
+      <div class="contact-item">
+        <span>Company</span>
+        <a href="https://acuvate.com" target="_blank">ACUVATE Software Pvt. Ltd.</a>
+      </div>
+      <div class="contact-item">
+        <span>LinkedIn</span>
+        <a href="https://www.linkedin.com/in/dhiraj7kr/" target="_blank">linkedin.com/in/dhiraj7kr</a>
+      </div>
+      <div class="contact-item">
+        <span>GitHub</span>
+        <a href="https://github.com/dhiraj7kr" target="_blank">github.com/dhiraj7kr</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Dhiraj Kumar · Hyderabad, India
+  </footer>
+
+</div>
+</body>
+</html>
